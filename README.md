@@ -16,9 +16,9 @@
 
 This repository presents a complete and reproducible research pipeline for auditing algorithmic bias on user-generated adult video platforms. The project focuses on **intersectional discrimination**, providing quantitative evidence of how recommendation systems systematically disadvantage Black, Latina, and Asian women through compounding classification bias, temporal economic harm, and metadata-embedded linguistic harm.
 
-The corpus comprises **535,236 videos across 111 categories and 52 features**. The Random Forest baseline (accuracy: 87.8%, F1: 0.758) reveals substantial Equal Opportunity Differences: Black Women (EOD: 0.191, recall: 0.564 vs. 0.755 for White Women) and Latina Women (EOD: 0.195, recall: 0.560) face the steepest classification disadvantage. Beyond model performance, the analysis documents that Black Women's content ratings are declining significantly faster than the corpus average (slope gap: −3.38/year, bootstrap 95% CI excludes zero) and identifies racial occupational pipeline segregation in the platform's amateur content economy.
+The corpus comprises **535,236 videos across 111 categories and 52 features**. The Random Forest baseline (accuracy: 87.8%, F1: 0.758) reveals substantial Equal Opportunity Differences: Black Women (EOD: 0.196, recall: 0.562 vs. 0.758 for White Women) and Latina Women (EOD: 0.200, recall: 0.558) face the steepest classification disadvantage. Beyond model performance, the analysis documents that Black Women's content ratings are declining significantly faster than the corpus average (slope gap: −3.38/year, bootstrap 95% CI [−3.75, −2.98]) and identifies racial occupational pipeline segregation in the platform's amateur content economy.
 
-Six mitigation strategies are compared using **Pareto analysis** on two objectives (accuracy × fairness). Only two strategies are non-dominated: **post-processing ThresholdOptimizer** (accuracy: 0.837, near-exact parity — EOD range −0.018 to 0.000 across all groups) and **pre-processing reweighing** (accuracy: 0.953, Black Women EOD reduced from 0.191 to 0.076 — a 60% reduction). Critically, adversarial debiasing was dominated on both objectives and *worsened* outcomes for Asian Women (EOD: 0.105 → 0.283) because their content vocabulary constitutes the classification signal itself — a feature representation problem that reweighting cannot solve. This work provides a fully reproducible framework for auditing, measuring, and mitigating intersectional algorithmic harm in content platforms.
+Six mitigation strategies are compared using **Pareto analysis** on two objectives (accuracy × fairness). Only two strategies are non-dominated: **post-processing ThresholdOptimizer** (accuracy: 0.839, near-exact parity — max EOD 0.027 across all groups) and **pre-processing reweighing** (accuracy: 0.953, Black Women EOD reduced from 0.196 to 0.092 — a 53% reduction). Critically, adversarial debiasing was dominated on both objectives and *worsened* outcomes for Asian Women (EOD: 0.109 → 0.283, from original thesis run) because their content vocabulary constitutes the classification signal itself — a feature representation problem that reweighting cannot solve. This work provides a fully reproducible framework for auditing, measuring, and mitigating intersectional algorithmic harm in content platforms.
 
 ---
 
@@ -26,7 +26,7 @@ Six mitigation strategies are compared using **Pareto analysis** on two objectiv
 
 Adult content platforms are among the largest and least-studied sites of algorithmic labour in the digital economy. The workers whose content they host are not employees; they are independent creators whose income depends on platform-mediated visibility — recommendation systems, category assignments, search rankings. When those systems exhibit bias, the harm is not abstract. It is economic, recurring, and structurally invisible.
 
-This research starts from a precise question: does the classification system that organises content on a major user-generated adult video platform treat all creators fairly? The answer is measurably no. Black Women's content is recalled correctly at 0.564 — nearly 20 percentage-points below White Women's 0.755. That gap is not random noise; it is reproduced consistently across model types, across thresholds, and over time. Black Women's average ratings are also declining 3.38 rating-points per year faster than the corpus average, a statistically significant trend with no tested intervention that reverses it.
+This research starts from a precise question: does the classification system that organises content on a major user-generated adult video platform treat all creators fairly? The answer is measurably no. Black Women's content is recalled correctly at 0.562 — nearly 20 percentage-points below White Women's 0.758. That gap is not random noise; it is reproduced consistently across model types, across thresholds, and over time. Black Women's average ratings are also declining 3.38 rating-points per year faster than the corpus average, a statistically significant trend with no tested intervention that reverses it.
 
 The platform does not create these workers' economic precarity. But it does amplify it, at scale, automatically, without audit.
 
@@ -44,16 +44,16 @@ This project was guided by five core research questions. Below, each question is
 
 **Answer:** The analysis of the corpus (535,236 videos, 52 features, 111 categories) reveals significant representational and engagement biases prior to any modelling. Content is not represented or engaged with equally across demographic groups, indicating systemic issues at the platform-infrastructure level.
 
-- **Representational Disparity:** Black Women comprise **2.98%** of the corpus (15,966 videos); Latina Women 3.23% (17,276 videos); Asian Women 2.94% (15,733 videos). These figures mask how concentrated representation is: the top 1% of uploaders account for a disproportionate share of content, creating an occupational pipeline where marginalised groups are structurally absent from the high-visibility tier.
+- **Representational Disparity:** Black Women comprise **2.98%** of the corpus (15,966 videos); Latina Women **2.63%** (14,070 videos); Asian Women **2.84%** (15,196 videos). These figures mask how concentrated representation is: the top 1% of uploaders account for a disproportionate share of content, creating an occupational pipeline where marginalised groups are structurally absent from the high-visibility tier.
 - **Stereotypical Association (PMI):** Pointwise Mutual Information analysis of user-submitted tags reveals that the term **"black girl"** carries a PMI of **5.07** for the Black Women group — the highest among all analysed terms — indicating that racial identity is encoded primarily through user-generated metadata rather than platform-assigned categories. This linguistic harm is embedded in the platform's infrastructure, not only in its models.
-- **Engagement Gap — the inversion that matters:** White Women hold a statistically significant engagement advantage. Their median views-per-day is **4.40**, compared to **3.69 (Asian)**, **3.68 (Black)**, and **3.66 (Latina)**. The rating trend compounds this: Black Women's average ratings are declining **3.38 rating-points/year faster** than the corpus average (bootstrap 95% CI excludes zero), representing a temporal economic harm with no natural reversal mechanism.
+- **Engagement Gap — the inversion that matters:** White Women hold a statistically significant engagement advantage. Their mean views-per-day is **4.26**, compared to **3.46 (Black)**, **3.44 (Latina)**, and **3.43 (Asian)**. The rating trend compounds this: Black Women's average ratings are declining **3.38 rating-points/year faster** than the corpus average (bootstrap 95% CI [−3.75, −2.98]), representing a temporal economic harm with no natural reversal mechanism.
 
-| Group        | Median Views per Day | N (full corpus) |
-| :----------- | :------------------: | :-------------: |
-| White Women  |         4.40         |    29,771       |
-| Asian Women  |         3.69         |    15,733       |
-| Black Women  |         3.68         |    11,253       |
-| Latina Women |         3.66         |    17,242       |
+| Group        | Mean Views per Day | N (full corpus) |
+| :----------- | :----------------: | :-------------: |
+| White Women  |        4.26        |    28,767       |
+| Black Women  |        3.46        |    15,966       |
+| Latina Women |        3.44        |    14,070       |
+| Asian Women  |        3.43        |    15,196       |
 
 > _**Evidence Files:** `src/analysis/02_comprehensive_eda.py`, `src/analysis/03_intersectional_profiling.py`, `src/analysis/17_engagement_bias_analysis.py`. Authoritative numbers in `outputs/data/02_eda_views_disparities_stats.csv` and `outputs/data/19_trend_slopes.csv`._
 
@@ -70,14 +70,14 @@ This project was guided by five core research questions. Below, each question is
 
 | Group        | N (test) | Accuracy | Recall | F1-Score | EOD vs White Women |
 | :----------- | -------: | :------: | :----: | :------: | :----------------: |
-| White Women  |    5,944 |  0.917   | 0.755  |  0.837   |         —          |
-| Asian Women  |    3,129 |  0.878   | 0.650  |  0.744   |       0.105        |
-| Black Women  |    2,272 |  0.840   | 0.564  |  0.689   |     **0.191**      |
-| Latina Women |    3,455 |  0.812   | 0.560  |  0.669   |     **0.195**      |
+| White Women  |    5,754 |  0.917   | 0.758  |  0.842   |         —          |
+| Asian Women  |    3,039 |  0.876   | 0.649  |  0.740   |       0.109        |
+| Black Women  |    3,193 |  0.844   | 0.562  |  0.686   |     **0.196**      |
+| Latina Women |    2,814 |  0.810   | 0.558  |  0.664   |     **0.200**      |
 
 *Source: `outputs/data/07_fairness_group_metrics.csv`, `outputs/data/07_fairness_disparities.csv`. EOD = White Women TPR − Group TPR; positive = group is disadvantaged.*
 
-Black Women recall (0.564) is 19.1 percentage-points below White Women (0.755): almost one in five Black Women videos that should be correctly categorised is instead missed. Latina Women (recall 0.560, EOD 0.195) face the steepest classification gap. The BERT model reduces these gaps at the cost of interpretability; re-running on the corrected corpus is planned (see `REBUILD_PLAN.md`).
+Black Women recall (0.562) is 19.6 percentage-points below White Women (0.758): almost one in five Black Women videos that should be correctly categorised is instead missed. Latina Women (recall 0.558, EOD 0.200) face the steepest classification gap. The BERT model reduces these gaps at the cost of interpretability; per-group full-run metrics pending re-run (see `REBUILD_PLAN.md`).
 
 > _**Evidence Files:** `src/models/07_rf_baseline.py` (RF), `src/models/09_bert_baseline.py` (BERT). Authoritative canonical-run numbers in `outputs/data/07_fairness_group_metrics.csv` and `outputs/data/07_fairness_disparities.csv`._
 
@@ -107,25 +107,25 @@ Black Women recall (0.564) is 19.1 percentage-points below White Women (0.755): 
 
 | Strategy | Test Accuracy | Test F1 | Black Women EOD | Max EOD (any group) | Pareto status |
 | :------- | :-----------: | :-----: | :-------------: | :-----------------: | :-----------: |
-| RF Baseline | 0.878 | 0.758 | 0.191 | 0.195 (Latina) | dominated |
-| Reweighed RF | **0.953** | **0.916** | 0.076 | 0.105 (Asian) | **non-dominated** |
-| In-proc (EG + DP) | 0.880 | — | — | 0.294 (Latina) | dominated |
-| Post-proc (ThresholdOpt) | 0.837 | 0.684 | −0.015 | 0.018 | **non-dominated** |
-| Adversarial debiasing | 0.796 | 0.479 | 0.276 | **0.360** (Latina) | dominated |
+| RF Baseline | 0.878 | 0.758 | 0.196 | 0.200 (Latina) | dominated |
+| Reweighed RF | **0.953** | **0.915** | 0.092 | 0.099 (Asian) | **non-dominated** |
+| In-proc (EG + DP) | 0.878 | 0.809 | 0.138 | 0.297 (Latina) | dominated |
+| Post-proc (ThresholdOpt) | 0.839 | 0.693 | 0.008 | 0.027 (Latina) | **non-dominated** |
+| Adversarial debiasing | 0.796 | 0.479 | 0.276 | **0.360** (Latina) | dominated ‡ |
 | DistilBERT | 0.926 | 0.871 | — | — | pending re-run |
 
-*Source: `outputs/data/25_pareto_points.csv`, `outputs/data/10_reweigh_overall_metrics.csv`, `outputs/data/11b_adversarial_overall_metrics.csv`, `outputs/data/12_postproc_overall_metrics.csv`.*
+*Source: `outputs/data/25_pareto_points.csv`, `outputs/data/10_reweigh_overall_metrics.csv`, `outputs/data/12_postproc_overall_metrics.csv`. ‡ Adversarial debiasing results are from the original thesis run; step 11b outputs are not reproduced in this repository.*
 
-**Key finding — adversarial debiasing failure:** Adversarial debiasing was the only strategy that *increased* EOD for two groups relative to the baseline (Asian Women: 0.105 → 0.283; Latina Women: 0.195 → 0.360). This is not a tuning failure but a structural one: because racial identity is encoded primarily in tag-based vocabulary, penalising the model for using protected features removes the signal it needs to classify these categories accurately. Post-processing is the only technique that achieves near-exact parity (EOD range: −0.018 to 0.000 across all groups) at a 4.1 pp accuracy cost.
+**Key finding — adversarial debiasing failure:** Adversarial debiasing was the only strategy that *increased* EOD for two groups relative to the baseline (Asian Women: 0.109 → 0.283; Latina Women: 0.200 → 0.360, from original thesis run). This is not a tuning failure but a structural one: because racial identity is encoded primarily in tag-based vocabulary, penalising the model for using protected features removes the signal it needs to classify these categories accurately. Post-processing achieves near-exact parity (max EOD 0.027 across all groups) at a 3.9 pp accuracy cost.
 
 **Reweighed RF per-group performance (test set):**
 
 | Group        | N (test) | Accuracy | Recall | F1-Score | EOD vs White Women |
 | :----------- | -------: | :------: | :----: | :------: | :----------------: |
-| White Women  |    5,944 |  0.973   | 0.930  |  0.951   |         —          |
-| Asian Women  |    3,129 |  0.941   | 0.825  |  0.884   |       0.105        |
-| Black Women  |    2,272 |  0.941   | 0.854  |  0.901   |       0.076        |
-| Latina Women |    3,455 |  0.917   | 0.848  |  0.874   |       0.082        |
+| White Women  |    5,754 |  0.973   | 0.930  |  0.952   |         —          |
+| Asian Women  |    3,039 |  0.942   | 0.831  |  0.886   |       0.099        |
+| Black Women  |    3,193 |  0.935   | 0.838  |  0.887   |       0.092        |
+| Latina Women |    2,814 |  0.918   | 0.853  |  0.875   |       0.077        |
 
 *Source: `outputs/data/10_reweigh_group_metrics.csv`, `outputs/data/10_reweigh_disparities.csv`.*
 
@@ -137,13 +137,13 @@ Black Women recall (0.564) is 19.1 percentage-points below White Women (0.755): 
 
 **Answer:** The harms are multi-layered, compounding, and cannot be resolved by model-level interventions alone. Three distinct harm types are documented:
 
-1. **Classification harm (allocative):** A recall of 0.564 for Black Women means their content is systematically under-surfaced — a direct, measurable reduction in platform-mediated economic opportunity. This is not a statistical artefact; it is a recurring economic penalty applied at scale.
+1. **Classification harm (allocative):** A recall of 0.562 for Black Women means their content is systematically under-surfaced — a direct, measurable reduction in platform-mediated economic opportunity. This is not a statistical artefact; it is a recurring economic penalty applied at scale.
 
 2. **Temporal economic harm:** Black Women's content ratings are declining 3.38 rating-points/year faster than the corpus average (95% bootstrap CI excludes zero). No currently tested mitigation strategy addresses this trend. A model that is "fair today" can become unfair over time as platform dynamics shift.
 
 3. **Linguistic harm (metadata-embedded):** PMI analysis documents that racial identity is encoded primarily through user-submitted tags — terms the platform does not control. This means harm is embedded in the platform's infrastructure, not just its models, and survives any model-level mitigation. A KL divergence analysis of category distributions further documents that categories associated with Black Women's content are structurally divergent from the corpus norm.
 
-- **The illusion of objectivity:** Overall accuracy of 87.8% (RF) obscures group-level disparities as large as 0.195 EOD. Top-line metrics are ethically insufficient.
+- **The illusion of objectivity:** Overall accuracy of 87.8% (RF) obscures group-level disparities as large as 0.200 EOD. Top-line metrics are ethically insufficient.
 - **Regulatory gap:** No current algorithmic accountability framework (EU AI Act, DSA) mandates intersectional fairness auditing for adult content platforms. This gap exposes platform-dependent workers to harms that are empirically documented but legally unaddressed.
 
 > _**Evidence Files:** `src/analysis/17_engagement_bias_analysis.py`, `src/analysis/19_advanced_statistics.py`. Key numbers in `outputs/data/19_trend_slopes.csv`, `outputs/data/19_category_divergence.csv`, `outputs/data/03_pmi_intersectional_black_women.csv`. Harm taxonomy: `theory/harm_taxonomy.yaml`._
