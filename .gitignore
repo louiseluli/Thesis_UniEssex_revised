@@ -10,7 +10,7 @@ __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 
-# Logs and local backups
+# Logs and local backups (generated; not version-controlled)
 logs/
 backups/
 .git_prev_*

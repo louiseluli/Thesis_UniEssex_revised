@@ -31,7 +31,7 @@ COMMON  := --config $(CFG) $(SC) $(SAMPLE)
 .PHONY: help env reqs fmt lint check all eda models fairness dissertation presentations \
         01 02 03 04 05 06 07 07a 08 09 10 11 12 13 \
         14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 \
-        commit clean
+        collect selfcheck install-schedules commit clean
 
 help:
 	@echo "Targets:"
@@ -169,6 +169,22 @@ fairness: 08 10 11 12 13 30
 dissertation: 14 24 25 26
 presentations: 28 29
 all: 01 eda 06 models fairness 15 16 17 18 19 20 21 22 23 dissertation presentations
+
+# --- Automated data collection & pipeline scheduling
+collect:  ## Incremental API collection: picks up new videos (newest-first, skips known IDs)
+	$(PY) $(SRC)/data/collector.py --ordering newest --new-only
+
+selfcheck:  ## Run key pipeline steps in selfcheck mode (safe, ~15 min, no DB overwrite)
+	bash scripts/pipeline_selfcheck.sh
+
+install-schedules:  ## Register daily collection + weekly selfcheck with macOS launchd
+	@mkdir -p logs
+	@chmod +x scripts/collect_daily.sh scripts/pipeline_selfcheck.sh
+	cp scripts/com.louisesfer.thesis.collect.plist ~/Library/LaunchAgents/
+	cp scripts/com.louisesfer.thesis.selfcheck.plist ~/Library/LaunchAgents/
+	launchctl load ~/Library/LaunchAgents/com.louisesfer.thesis.collect.plist
+	launchctl load ~/Library/LaunchAgents/com.louisesfer.thesis.selfcheck.plist
+	@echo “Scheduled: collection daily at 03:00, selfcheck weekly Sunday at 04:00”
 
 # --- Commit helper for “Output 0” bootstrap commit
 commit:
