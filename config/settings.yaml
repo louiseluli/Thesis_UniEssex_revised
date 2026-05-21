@@ -1,0 +1,170 @@
+# =============================================================================
+# File: config/settings.yaml
+# Project: AlgoFairnessPornometrics
+#
+# Purpose
+# -------
+# Single source of truth for project paths, reproducibility, plotting themes,
+# DB table names, and project-specific knobs used throughout the pipeline.
+#
+# How this file is used
+# ---------------------
+# - Loaded via: src.utils.theme_manager.load_config()
+# - Consumed by: data builders, analysis, models, fairness, visualization
+# - Path variables may reference other keys using ${...} syntax and are
+#   resolved by the loader (e.g., ${project.root}).
+#
+# Change policy
+# -------------
+# - Never hardcode paths in scripts—always read them from here.
+# - Keep reproducibility.seed stable (95) to ensure identical runs.
+# - Only add new keys under an appropriate section with a short inline comment.
+#
+# Sections overview
+# -----------------
+# 1) project          : Project identity and root directory
+# 2) paths            : Canonical locations for data, outputs, figures, narratives
+# 3) reproducibility  : Global random seed
+# 4) viz              : Plotting defaults (DPI, themes, palettes)
+# 5) db               : Logical names for database tables
+# 6) project_specifics: Intersection columns and feature generation defaults
+# =============================================================================
+
+# --- 1. Project & Path Configuration -----------------------------------------
+project:
+  name: AlgoFairnessPornometrics
+  root: "."
+
+paths:
+  # Note: The ${project.root} variable will be resolved by the loading script.
+  data: "${project.root}/outputs/data" # Changed to point to outputs/data for consistency
+  config: "${project.root}/config"
+  outputs: "${project.root}/outputs"
+  figures: "${project.root}/outputs/figures" # Simplified path
+  narratives: "${project.root}/outputs/narratives"
+  db_file: "${project.root}/data/redtube_videos.db" # Consolidated DB path
+
+# --- 2. Reproducibility ---
+reproducibility:
+  seed: 95
+
+# --- 3. Visualization Settings ---
+viz:
+  dpi: 300 # Increased DPI for publication quality
+  save_png: true
+  save_pdf: false # Set to false to avoid clutter, can be enabled if needed
+
+  # Curated, professional, and colorblind-friendly palettes
+  palettes:
+    sections:
+      # Exploratory plots: balanced, approachable hues
+      eda:
+        light:
+          [
+            "#4E79A7",
+            "#F28E2B",
+            "#E15759",
+            "#76B7B2",
+            "#59A14F",
+            "#EDC948",
+            "#B07AA1",
+            "#9C755F",
+            "#FF9DA7",
+            "#BAB0AC",
+          ]
+        dark:
+          [
+            "#8AB8FF",
+            "#FFB366",
+            "#FF7B84",
+            "#8ED4CF",
+            "#7BC67B",
+            "#F4D35E",
+            "#C39BD3",
+            "#B39C82",
+            "#FFB7C1",
+            "#D3D3D3",
+          ]
+
+      # Fairness plots: emphasize interpretability
+      fairness:
+        light:
+          [
+            "#4C78A8",
+            "#72B7B2",
+            "#54A24B",
+            "#ECA02C",
+            "#E45756",
+            "#B279A2",
+            "#FF9DA6",
+            "#9D755D",
+          ]
+        dark:
+          [
+            "#9BBCEF",
+            "#9BD4CF",
+            "#8ED081",
+            "#F2BE5C",
+            "#F27970",
+            "#C8A3CC",
+            "#FFB7C1",
+            "#C1A789",
+          ]
+
+      # Model diagnostics: strong contrast set
+      models:
+        light:
+          [
+            "#3366CC",
+            "#DC3912",
+            "#FF9900",
+            "#109618",
+            "#990099",
+            "#0099C6",
+            "#DD4477",
+            "#66AA00",
+          ]
+        dark:
+          [
+            "#7AA2FF",
+            "#FF7F66",
+            "#FFB347",
+            "#5CD17F",
+            "#D189D1",
+            "#4CC3E0",
+            "#FF7BA3",
+            "#AEDD58",
+          ]
+
+  themes:
+    light:
+      facecolor: "#FFFFFF"
+      gridcolor: "#EAEAEA"
+      textcolor: "#333333"
+    dark:
+      facecolor: "#1E1E1E" # A softer dark background
+      gridcolor: "#444444"
+      textcolor: "#F2F2F2"
+
+# --- 4. Database Configuration ---
+db:
+  tables:
+    videos: "videos"
+    video_tags: "video_tags"
+    video_categories: "video_categories"
+
+# --- 5. Project Specifics ---
+project_specifics:
+  intersection:
+    primary_race_col: "race_ethnicity_black"
+    primary_gender_col: "gender_female"
+    output_col_name: "intersectional_black_female"
+
+  feature_generation_keys:
+    - "stereotype_terms"
+    - "race_ethnicity"
+    - "nationality"
+    - "hair_color"
+    - "gender"
+    - "sexuality"
+    - "age"

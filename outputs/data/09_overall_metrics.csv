@@ -1,0 +1,3 @@
+Split,Accuracy,Precision,Recall,F1
+Val,0.929,0.866,0.885,0.875
+Test,0.926,0.859,0.884,0.871

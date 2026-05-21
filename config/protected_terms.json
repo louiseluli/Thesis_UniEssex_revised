@@ -1,0 +1,1660 @@
+{
+  "_source_notes": {
+    "rationale": "Methodological lexicon for fairness audit; separates race, nationality and hair color; includes granular demonyms and colloquial slang.",
+    "methodology": "Structure follows official standards (e.g., ONS/OMB) and advocacy glossaries; supra-national ethnicity kept distinct from nationality to support intersectional analysis.",
+    "policy": "Race/ethnicity and nationality are never conflated. Genre terms (e.g., 'hentai') are preserved and flagged rather than removed.",
+    "sources": [
+      "RedTube API tags/categories inspection",
+      "ONS equality measurement guidance (structure motivation)",
+      "Stonewall Glossary (gender/sexuality alignment)"
+    ]
+  },
+  "stereotype_terms": {
+    "sexualized_attributes": [
+      "bbw",
+      "thick",
+      "busty",
+      "exotic"
+    ],
+    "violence_degradation": [
+      "choke",
+      "slap",
+      "spit"
+    ],
+    "fetish_markers": [
+      "bdsm",
+      "cuckold",
+      "femdom",
+      "dom",
+      "submissive",
+      "sub",
+      "fetish"
+    ]
+  },
+  "race_ethnicity": {
+    "asian": [
+      "asian",
+      "oriental"
+    ],
+    "black": [
+      "black",
+      "ebony",
+      "blk",
+      "african",
+      "afro",
+      "african american",
+      "afro-american",
+      "afro-caribbean",
+      "afro-latina"
+    ],
+    "latina": [
+      "latina",
+      "latino",
+      "latinx",
+      "hispanic",
+      "chicana",
+      "chicano",
+      "latine"
+    ],
+    "white": [
+      "white",
+      "caucasian",
+      "european"
+    ],
+    "middle_eastern_north_african": [
+      "arab",
+      "middle eastern",
+      "mena"
+    ],
+    "mixed_or_other": [
+      "interracial",
+      "mixed",
+      "indian",
+      "south asian",
+      "native american",
+      "indigenous"
+    ]
+  },
+  "nationality": {
+    "east_asian": [
+      "japan*",
+      "japon*",
+      "francojapon*",
+      "nippon*",
+      "korea*",
+      "corean*",
+      "china*",
+      "chines*",
+      "taiwan*",
+      "hong kong*",
+      "hongkonger*",
+      "macau*",
+      "macanese*"
+    ],
+    "southeast_asian": [
+      "thai*",
+      "siam*",
+      "filipin*",
+      "filipina*",
+      "pinay*",
+      "pinoy*",
+      "vietnam*",
+      "viet*",
+      "indonesia*",
+      "indonesian*",
+      "malays*",
+      "malay*",
+      "bumiputera*",
+      "singapor*",
+      "singaporean*",
+      "cambod*",
+      "khmer*",
+      "lao*",
+      "laotian*",
+      "myanmar*",
+      "burmes*",
+      "brunei*",
+      "bruneian*",
+      "timor*",
+      "timorese*",
+      "asean*"
+    ],
+    "south_asian": [
+      "india*",
+      "indian*",
+      "pakistan*",
+      "pakistani*",
+      "bangladesh*",
+      "bangladeshi*",
+      "sri lanka*",
+      "srilankan*",
+      "sinhala*",
+      "sinhalese*",
+      "tamil*",
+      "nepal*",
+      "nepales*",
+      "bhutan*",
+      "bhutanese*",
+      "maldiv*",
+      "maldivian*"
+    ],
+    "central_asian": [
+      "kazakh*",
+      "kazakhstan*",
+      "kyrgyz*",
+      "kirgiz*",
+      "kyrgyzstan*",
+      "tajik*",
+      "tajikistan*",
+      "turkmen*",
+      "turkmenistan*",
+      "uzbek*",
+      "uzbekistan*",
+      "central asian*"
+    ],
+    "mena": [
+      "arab*",
+      "levant*",
+      "mashreq*",
+      "maghreb*",
+      "turk*",
+      "türki*",
+      "anatolian*",
+      "iraq*",
+      "iraqi*",
+      "iran*",
+      "persian*",
+      "iranian*",
+      "syri*",
+      "syrian*",
+      "lebanes*",
+      "liban*",
+      "jordani*",
+      "amman*",
+      "israel*",
+      "israeli*",
+      "hebrew*",
+      "sabra*",
+      "palestin*",
+      "gaz*",
+      "west bank*",
+      "saudi*",
+      "hijaz*",
+      "najdi*",
+      "emirati*",
+      "uae*",
+      "abudhabi*",
+      "dubai*",
+      "qatari*",
+      "kuwait*",
+      "oman*",
+      "omani*",
+      "yemen*",
+      "yemeni*",
+      "bahrain*"
+    ],
+    "africa": [
+      "egypt*",
+      "egyptian*",
+      "libya*",
+      "libyan*",
+      "tunisi*",
+      "tunisian*",
+      "alger*",
+      "algerian*",
+      "morocc*",
+      "maroc*",
+      "moroccan*",
+      "sudan*",
+      "sudanese*",
+      "south sudan*",
+      "southsudanese*",
+      "nigeria*",
+      "nigerian*",
+      "naija*",
+      "ghana*",
+      "ghanaian*",
+      "benin*",
+      "beninese*",
+      "togo*",
+      "togolese*",
+      "burkina*",
+      "burkinab*",
+      "niger*",
+      "nigerien*",
+      "cote d'ivoire*",
+      "côte d'ivoire*",
+      "ivorian*",
+      "ivor*",
+      "ivoirien*",
+      "liberia*",
+      "liberian*",
+      "sierra leone*",
+      "sierraleon*",
+      "krio*",
+      "gambia*",
+      "gambian*",
+      "guinea*",
+      "guinean*",
+      "guinea-bissau*",
+      "bissau-guinean*",
+      "cape verde*",
+      "cabo verde*",
+      "capeverdean*",
+      "caboverdian*",
+      "cameroon*",
+      "cameroonian*",
+      "congo*",
+      "congolese*",
+      "drc*",
+      "brazzaville*",
+      "kinshasa*",
+      "central african*",
+      "car*",
+      "gabon*",
+      "gabonese*",
+      "equatorial guinea*",
+      "equatoguinean*",
+      "equatoguine*",
+      "bubi*",
+      "chad*",
+      "chadian*",
+      "sao tome*",
+      "são tom*",
+      "santomean*",
+      "principe*",
+      "ethiopia*",
+      "ethiopian*",
+      "amhara*",
+      "oromo*",
+      "tigray*",
+      "eritrea*",
+      "eritrean*",
+      "djibouti*",
+      "djiboutian*",
+      "somalia*",
+      "somali*",
+      "kenya*",
+      "kenyan*",
+      "tanzania*",
+      "tanzanian*",
+      "uganda*",
+      "ugandan*",
+      "rwanda*",
+      "rwandan*",
+      "burundi*",
+      "burundian*",
+      "south sudan*",
+      "southsudanese*",
+      "south africa*",
+      "southafrican*",
+      "mzansi*",
+      "botswana*",
+      "batswana*",
+      "tswana*",
+      "namibia*",
+      "namibian*",
+      "zimbabwe*",
+      "zimbabwean*",
+      "zambia*",
+      "zambian*",
+      "malawi*",
+      "malawian*",
+      "mozambique*",
+      "mozambican*",
+      "angola*",
+      "angolan*",
+      "lesotho*",
+      "basotho*",
+      "sesotho*",
+      "eswatini*",
+      "swazi*",
+      "swaziland*",
+      "madagascar*",
+      "malagasy*",
+      "mauritius*",
+      "mauritian*",
+      "seychelles*",
+      "seychellois*",
+      "comoros*",
+      "comorian*",
+      "mauritania*",
+      "mauritanian*",
+      "saharawi*",
+      "western sahara*"
+    ],
+    "europe": [
+      "albania*",
+      "albanian*",
+      "albanes*",
+      "andorra*",
+      "andorran*",
+      "armenia*",
+      "armenian*",
+      "austria*",
+      "austrian*",
+      "azerbaijan*",
+      "azerbaijani*",
+      "azeri*",
+      "belarus*",
+      "belarusian*",
+      "belarussian*",
+      "belgium*",
+      "belgian*",
+      "bosnia*",
+      "bosnian*",
+      "herzegovina*",
+      "bulgaria*",
+      "bulgarian*",
+      "croatia*",
+      "croatian*",
+      "cyprus*",
+      "cypriot*",
+      "czech*",
+      "czechia*",
+      "czechian*",
+      "bohemia*",
+      "denmark*",
+      "danish*",
+      "estonia*",
+      "estonian*",
+      "finland*",
+      "finnish*",
+      "suomi*",
+      "france*",
+      "french*",
+      "francais*",
+      "français*",
+      "frances*",
+      "germany*",
+      "german*",
+      "alemao*",
+      "alemão*",
+      "aleman*",
+      "alemán*",
+      "greece*",
+      "greek*",
+      "hellenic*",
+      "hungary*",
+      "hungarian*",
+      "magyar*",
+      "iceland*",
+      "icelandic*",
+      "ireland*",
+      "irish*",
+      "eire*",
+      "éire*",
+      "italy*",
+      "italian*",
+      "italian*",
+      "italian*",
+      "italian*",
+      "italian*",
+      "italian*",
+      "italiano*",
+      "italiana*",
+      "latvia*",
+      "latvian*",
+      "lithuania*",
+      "lithuanian*",
+      "luxembourg*",
+      "luxembourgish*",
+      "letzebuerg*",
+      "malta*",
+      "maltese*",
+      "moldova*",
+      "moldovan*",
+      "monaco*",
+      "monegasque*",
+      "montenegro*",
+      "montenegrin*",
+      "netherlands*",
+      "dutch*",
+      "holland*",
+      "north macedonia*",
+      "macedonian*",
+      "norway*",
+      "norwegian*",
+      "poland*",
+      "polish*",
+      "portugal*",
+      "portuguese*",
+      "portugues*",
+      "romania*",
+      "romanian*",
+      "român*",
+      "rumen*",
+      "russia*",
+      "russian*",
+      "san marino*",
+      "sammarinese*",
+      "serbia*",
+      "serbian*",
+      "slovakia*",
+      "slovak*",
+      "slovenia*",
+      "slovenian*",
+      "spain*",
+      "spanish*",
+      "espanol*",
+      "español*",
+      "espanhol*",
+      "sweden*",
+      "swedish*",
+      "switzerland*",
+      "swiss*",
+      "turkey*",
+      "türkiye*",
+      "turkish*",
+      "ukraine*",
+      "ukrainian*",
+      "united kingdom*",
+      "british*",
+      "uk*",
+      "english*",
+      "scottish*",
+      "welsh*",
+      "northern irish*",
+      "brit*",
+      "anglo*",
+      "vatican*",
+      "holy see*",
+      "georgia*",
+      "georgian*",
+      "kosovo*",
+      "kosovar*"
+    ],
+    "north_america": [
+      "canada*",
+      "canadian*",
+      "united states*",
+      "usa*",
+      "u.s.*",
+      "us american*",
+      "american*",
+      "yankee*",
+      "mexico*",
+      "mexican*",
+      "mexican*",
+      "mexicana*",
+      "mexicano*",
+      "alaska*",
+      "hawaii*",
+      "hawaiian*"
+    ],
+    "central_america": [
+      "guatemala*",
+      "guatemalan*",
+      "belize*",
+      "belizean*",
+      "honduras*",
+      "honduran*",
+      "el salvador*",
+      "salvadoran*",
+      "salvadorean*",
+      "nicaragua*",
+      "nicaraguan*",
+      "costa rica*",
+      "costarican*",
+      "tico*",
+      "panama*",
+      "panamanian*",
+      "central american*"
+    ],
+    "caribbean": [
+      "cuba*",
+      "cuban*",
+      "dominican republic*",
+      "dominican*",
+      "haiti*",
+      "haitian*",
+      "jamaica*",
+      "jamaican*",
+      "trinidad*",
+      "trinidadian*",
+      "tobago*",
+      "trinbagonian*",
+      "barbados*",
+      "barbadian*",
+      "bajan*",
+      "bahamas*",
+      "bahamian*",
+      "antigua*",
+      "barbuda*",
+      "antiguan*",
+      "barbudan*",
+      "saint kitts*",
+      "kittitian*",
+      "nevis*",
+      "nevisian*",
+      "saint lucia*",
+      "saintlucian*",
+      "saint vincent*",
+      "grenadines*",
+      "vincentian*",
+      "grenada*",
+      "grenadian*",
+      "dominica*",
+      "dominican (dominicA)*",
+      "anguilla*",
+      "bermuda*",
+      "cayman*",
+      "turks and caicos*",
+      "british virgin*",
+      "us virgin*",
+      "puerto rico*",
+      "puerto rican*",
+      "guadeloupe*",
+      "martinique*",
+      "reunion*",
+      "mayotte*",
+      "french guiana*",
+      "aruba*",
+      "curaçao*",
+      "curacao*",
+      "bonaire*",
+      "sint maarten*",
+      "saint martin*",
+      "saint barth*",
+      "st. bart*",
+      "st bart*"
+    ],
+    "south_america": [
+      "argentin*",
+      "argentinian*",
+      "argentine*",
+      "bolivia*",
+      "bolivian*",
+      "brazil*",
+      "brazilian*",
+      "brasileir*",
+      "chile*",
+      "chilean*",
+      "chilen*",
+      "colombia*",
+      "colombian*",
+      "ecuador*",
+      "ecuadorean*",
+      "ecuadorian*",
+      "guyana*",
+      "guyanese*",
+      "paraguay*",
+      "paraguayan*",
+      "peru*",
+      "peruvian*",
+      "peruan*",
+      "suriname*",
+      "surinamese*",
+      "uruguay*",
+      "uruguayan*",
+      "venezuela*",
+      "venezuelan*",
+      "venezolan*",
+      "falkland*",
+      "malvinas*",
+      "south american*"
+    ],
+    "oceania": [
+      "australia*",
+      "australian*",
+      "new zealand*",
+      "kiwi*",
+      "new zealander*",
+      "papua new guinea*",
+      "papuan*",
+      "papua*",
+      "fiji*",
+      "fijian*",
+      "samoa*",
+      "samoan*",
+      "tonga*",
+      "tongan*",
+      "vanuatu*",
+      "ni-vanuatu*",
+      "ni‑vanuatu*",
+      "solomon islands*",
+      "solomon islander*",
+      "micronesia*",
+      "micronesian*",
+      "marshall islands*",
+      "marshallese*",
+      "palau*",
+      "palauan*",
+      "nauru*",
+      "nauruan*",
+      "kiribati*",
+      "i-kiribati*",
+      "tuvalu*",
+      "tuvaluan*",
+      "cook islands*",
+      "cook islander*",
+      "niue*",
+      "tokelau*",
+      "new caledonia*",
+      "caledonian*",
+      "french polynesia*",
+      "tahiti*",
+      "tahitian*",
+      "wallis*",
+      "futuna*"
+    ],
+    "caucasus": [
+      "armenia*",
+      "armenian*",
+      "azerbaijan*",
+      "azerbaijani*",
+      "azeri*",
+      "georgia*",
+      "georgian*"
+    ],
+    "territories_and_regions": [
+      "puerto rican*",
+      "puerto rico*",
+      "boricua*",
+      "guam*",
+      "guamanian*",
+      "american samoa*",
+      "samoan american*",
+      "u.s. virgin*",
+      "us virgin*",
+      "northern mariana*",
+      "chamorro*",
+      "isle of man*",
+      "manx*",
+      "cayman islands*",
+      "caymanian*",
+      "bermuda*",
+      "bermudian*",
+      "gibraltar*",
+      "gibraltarian*",
+      "turks and caicos*",
+      "tc islander*",
+      "british virgin*",
+      "anguila*",
+      "anguilla*",
+      "montserrat*",
+      "falkland*",
+      "malvinas*",
+      "aruba*",
+      "aruban*",
+      "sint maarten*",
+      "sintmaarten*",
+      "dutch st. martin*",
+      "bonaire*",
+      "saba*",
+      "st eustatius*",
+      "reunion*",
+      "réunion*",
+      "reunionnais*",
+      "guadeloupe*",
+      "guadeloupean*",
+      "martinique*",
+      "martiniquais*",
+      "mayotte*",
+      "mahorais*",
+      "french guiana*",
+      "guyane*",
+      "new caledonia*",
+      "caledonian*",
+      "french polynesia*",
+      "polynésien*",
+      "tahitian*",
+      "saint pierre*",
+      "miquelon*",
+      "saint martin*",
+      "st martin*",
+      "wallis*",
+      "futuna*",
+      "faroe*",
+      "faroese*",
+      "greenland*",
+      "greenlander*",
+      "kalaallit*",
+      "inuits*",
+      "hong kong*",
+      "hongkonger*",
+      "hk*",
+      "macau*",
+      "macao*",
+      "macanese*",
+      "taiwan*",
+      "taiwanese*",
+      "palestin*",
+      "gazan*",
+      "west bank*",
+      "vatican*",
+      "holy see*",
+      "kosovo*",
+      "kosovar*",
+      "western sahara*",
+      "saharawi*"
+    ]
+  },
+  "hair_color": {
+    "blonde": [
+      "blonde"
+    ],
+    "brunette": [
+      "brunette"
+    ],
+    "redhead": [
+      "redhead"
+    ]
+  },
+  "gender": {
+    "female": [
+      "female",
+      "woman",
+      "women",
+      "girl",
+      "she",
+      "lady",
+      "ladies",
+      "fem",
+      "feminine",
+      "femme",
+      "wife",
+      "girlfriend",
+      "mom",
+      "mother",
+      "aunt",
+      "sis",
+      "sister",
+      "ma",
+      "mama",
+      "mami",
+      "mamacita",
+      "miss",
+      "ms",
+      "madam",
+      "madame",
+      "ma'am",
+      "bride",
+      "gal",
+      "chick"
+    ],
+    "gender_male": [
+      "male",
+      "man",
+      "men",
+      "boy",
+      "he",
+      "gentleman",
+      "gentlemen",
+      "masculine",
+      "guy",
+      "dude",
+      "husband",
+      "boyfriend",
+      "dad",
+      "father",
+      "uncle",
+      "papi",
+      "daddy",
+      "mister",
+      "mr",
+      "sir",
+      "bro"
+    ],
+    "gender_trans": [
+      "transgender",
+      "trans",
+      "transsexual",
+      "ftm",
+      "mtf"
+    ]
+  },
+  "sexuality": {
+    "gay": [
+      "gay"
+    ],
+    "lesbian": [
+      "lesbian",
+      "lesbo"
+    ],
+    "bisexual": [
+      "bisexual"
+    ],
+    "straight": [
+      "straight",
+      "heterosexual",
+      "hetero",
+      "str8"
+    ],
+    "queer": [
+      "queer"
+    ]
+  },
+  "age": {
+    "age_young": [
+      "teen",
+      "young",
+      "18yo",
+      "student",
+      "school",
+      "barely legal"
+    ],
+    "age_mature": [
+      "mature",
+      "milf",
+      "cougar",
+      "older",
+      "gilf",
+      "granny",
+      "aunt",
+      "mom",
+      "mother",
+      "grandma",
+      "grandmother",
+      "nana",
+      "madura"
+    ]
+  },
+  "_meta": {
+    "version": "1.2-vocab2500",
+    "created_utc": "2025-09-04T20:18:55Z",
+    "purpose": "Intersectional fairness lexicon (adult-content metadata). Adds bias markers and intersectional generation rules while preserving legacy keys for backward compatibility.",
+    "sources": [
+      "GLAAD Media Reference Guide (trans terms)",
+      "Stonewall Glossary",
+      "HurtLex offensive lexicon",
+      "Hatebase multilingual repository",
+      "RedTube/XVideos tag inspections"
+    ]
+  },
+  "regex_settings": {
+    "casefold": true,
+    "word_boundaries": true,
+    "allow_hyphen_variants": true,
+    "ascii_fallback": true,
+    "exceptions": [
+      {
+        "pattern": "asian",
+        "negative_contexts": [
+          "caucasian"
+        ]
+      }
+    ]
+  },
+  "protected_attributes": {
+    "race_ethnicity": {
+      "black_african_diaspora": {
+        "preferred": [
+          "black",
+          "black woman",
+          "black man",
+          "african diaspora"
+        ],
+        "aliases": [
+          "afro",
+          "african",
+          "afro-caribbean",
+          "african american",
+          "black british",
+          "afro-latina",
+          "afro-latino"
+        ],
+        "harmful_aliases": [
+          "ebony",
+          "bbc"
+        ],
+        "definition": "Individuals of African descent across global diasporas; include racialized commodity/genital terms for audit only."
+      },
+      "latine": {
+        "preferred": [
+          "latina",
+          "latino",
+          "latine",
+          "hispanic"
+        ],
+        "aliases": [
+          "latinx",
+          "chicana",
+          "chicano"
+        ],
+        "harmful_aliases": [],
+        "definition": "Latin American origin or descent; 'latine' is gender-neutral."
+      },
+      "asian": {
+        "preferred": [
+          "asian"
+        ],
+        "aliases": [
+          "east asian",
+          "south asian",
+          "southeast asian",
+          "desi",
+          "pacific islander"
+        ],
+        "harmful_aliases": [
+          "oriental"
+        ],
+        "definition": "Umbrella over diverse Asian identities; includes diaspora labels seen in tags."
+      },
+      "white": {
+        "preferred": [
+          "white"
+        ],
+        "aliases": [
+          "caucasian",
+          "european"
+        ],
+        "harmful_aliases": [
+          "bwc"
+        ],
+        "definition": "European origin or descent; 'BWC' stored for audit only."
+      },
+      "mena": {
+        "preferred": [
+          "middle eastern",
+          "north african",
+          "mena",
+          "arab"
+        ],
+        "aliases": [
+          "levantine",
+          "maghrebi",
+          "amazigh",
+          "berber"
+        ],
+        "harmful_aliases": [],
+        "definition": "Middle East & North Africa."
+      },
+      "indigenous": {
+        "preferred": [
+          "indigenous",
+          "native american",
+          "first nations"
+        ],
+        "aliases": [
+          "māori",
+          "aboriginal australian",
+          "native hawaiian",
+          "pasifika"
+        ],
+        "harmful_aliases": [],
+        "definition": "Original peoples of specific lands/regions."
+      },
+      "mixed_intersectional": {
+        "preferred": [
+          "mixed",
+          "interracial"
+        ],
+        "aliases": [
+          "biracial",
+          "multiracial",
+          "blasian"
+        ],
+        "harmful_aliases": [],
+        "definition": "Mixed-race identities and cross-race depictions."
+      }
+    },
+    "gender_identity": {
+      "woman": {
+        "preferred": [
+          "woman",
+          "women"
+        ],
+        "aliases": [
+          "female"
+        ],
+        "harmful_aliases": [],
+        "definition": "Identifies as a woman."
+      },
+      "man": {
+        "preferred": [
+          "man",
+          "men"
+        ],
+        "aliases": [
+          "male"
+        ],
+        "harmful_aliases": [],
+        "definition": "Identifies as a man."
+      },
+      "trans_woman": {
+        "preferred": [
+          "trans woman"
+        ],
+        "aliases": [
+          "transgender woman",
+          "mtf"
+        ],
+        "harmful_aliases": [
+          "shemale",
+          "ladyboy",
+          "tgirl",
+          "transsexual",
+          "trap",
+          "transvestite"
+        ],
+        "definition": "Woman assigned male at birth."
+      },
+      "trans_man": {
+        "preferred": [
+          "trans man"
+        ],
+        "aliases": [
+          "transgender man",
+          "ftm"
+        ],
+        "harmful_aliases": [
+          "tranny man",
+          "she-man"
+        ],
+        "definition": "Man assigned female at birth."
+      },
+      "nonbinary": {
+        "preferred": [
+          "non-binary",
+          "nonbinary"
+        ],
+        "aliases": [
+          "enby"
+        ],
+        "harmful_aliases": [],
+        "definition": "Outside male/female binary."
+      },
+      "agender": {
+        "preferred": [
+          "agender"
+        ],
+        "aliases": [
+          "genderless",
+          "gender-free",
+          "neutrois"
+        ],
+        "harmful_aliases": [],
+        "definition": "Absence of gender."
+      },
+      "intersex": {
+        "preferred": [
+          "intersex"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Variations in sex characteristics."
+      },
+      "two_spirit": {
+        "preferred": [
+          "two-spirit"
+        ],
+        "aliases": [
+          "two spirit"
+        ],
+        "harmful_aliases": [],
+        "definition": "Indigenous umbrella term for gender-variant roles."
+      },
+      "genderfluid": {
+        "preferred": [
+          "genderfluid"
+        ],
+        "aliases": [
+          "gender-fluid"
+        ],
+        "harmful_aliases": [],
+        "definition": "Gender that changes over time."
+      },
+      "bigender": {
+        "preferred": [
+          "bigender"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Identifying with two genders."
+      },
+      "genderqueer": {
+        "preferred": [
+          "genderqueer"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Outside/beyond binary."
+      }
+    },
+    "sexual_orientation": {
+      "lesbian": {
+        "preferred": [
+          "lesbian"
+        ],
+        "aliases": [],
+        "harmful_aliases": [
+          "lesbo"
+        ],
+        "definition": "Woman primarily attracted to women."
+      },
+      "gay": {
+        "preferred": [
+          "gay"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Same-gender attraction (often men)."
+      },
+      "bisexual": {
+        "preferred": [
+          "bisexual"
+        ],
+        "aliases": [
+          "bi"
+        ],
+        "harmful_aliases": [],
+        "definition": "Attracted to more than one gender."
+      },
+      "queer": {
+        "preferred": [
+          "queer"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Umbrella for sexual/gender minorities."
+      },
+      "pansexual": {
+        "preferred": [
+          "pansexual"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Attraction regardless of sex/gender."
+      },
+      "asexual": {
+        "preferred": [
+          "asexual",
+          "ace"
+        ],
+        "aliases": [
+          "grey-asexual",
+          "gray-asexual"
+        ],
+        "harmful_aliases": [],
+        "definition": "Little/no sexual attraction."
+      },
+      "demisexual": {
+        "preferred": [
+          "demisexual"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Attraction contingent on strong bond."
+      },
+      "abrosexual": {
+        "preferred": [
+          "abrosexual"
+        ],
+        "aliases": [
+          "sexuality fluid"
+        ],
+        "harmful_aliases": [],
+        "definition": "Orientation that changes over time."
+      },
+      "skoliosexual": {
+        "preferred": [
+          "skoliosexual"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Attraction to gender-diverse people."
+      },
+      "androsexual": {
+        "preferred": [
+          "androsexual"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Attraction to masculinity."
+      },
+      "gynesexual": {
+        "preferred": [
+          "gynesexual"
+        ],
+        "aliases": [
+          "gynephilic"
+        ],
+        "harmful_aliases": [],
+        "definition": "Attraction to femininity."
+      }
+    },
+    "romantic_orientation": {
+      "aromantic": {
+        "preferred": [
+          "aromantic"
+        ],
+        "aliases": [
+          "aro"
+        ],
+        "definition": "Little/no romantic attraction."
+      },
+      "biromantic": {
+        "preferred": [
+          "biromantic"
+        ],
+        "aliases": [],
+        "definition": "Romantic attraction to more than one gender."
+      },
+      "panromantic": {
+        "preferred": [
+          "panromantic"
+        ],
+        "aliases": [],
+        "definition": "Romantic attraction regardless of sex/gender."
+      },
+      "demiromantic": {
+        "preferred": [
+          "demiromantic"
+        ],
+        "aliases": [],
+        "definition": "Romantic attraction contingent on strong bond."
+      },
+      "abroromantic": {
+        "preferred": [
+          "abroromantic"
+        ],
+        "aliases": [],
+        "definition": "Romantic orientation that changes over time."
+      },
+      "greyromantic": {
+        "preferred": [
+          "greyromantic",
+          "grayromantic"
+        ],
+        "aliases": [],
+        "definition": "Romantic attraction infrequent/low intensity."
+      }
+    },
+    "age_markers": {
+      "mature": {
+        "preferred": [
+          "mature",
+          "milf",
+          "cougar",
+          "gilf"
+        ],
+        "aliases": [
+          "older"
+        ],
+        "harmful_aliases": [],
+        "definition": "Older-adult descriptors used in tags."
+      },
+      "youth_tropes_flag": {
+        "preferred": [
+          "barely legal"
+        ],
+        "aliases": [
+          "18yo",
+          "18-year-old"
+        ],
+        "policy_note": "Ethics-only audit; excluded from fairness denominators."
+      }
+    },
+    "body_type": {
+      "plus_size": {
+        "preferred": [
+          "plus size"
+        ],
+        "aliases": [
+          "bbw",
+          "ssbbw",
+          "plump",
+          "voluptuous",
+          "thick",
+          "curvy",
+          "thick-thighs",
+          "curvy body"
+        ],
+        "harmful_aliases": [],
+        "definition": "Larger body-type descriptors; include common site tags."
+      },
+      "muscular": {
+        "preferred": [
+          "muscular",
+          "bodybuilder"
+        ],
+        "aliases": [
+          "fit",
+          "athletic",
+          "ripped",
+          "toned"
+        ],
+        "harmful_aliases": [],
+        "definition": "Muscularity/fitness emphasis."
+      },
+      "petite": {
+        "preferred": [
+          "petite"
+        ],
+        "aliases": [],
+        "harmful_aliases": [],
+        "definition": "Small stature descriptor."
+      }
+    },
+    "hair_color": {
+      "blonde": {
+        "preferred": [
+          "blonde"
+        ],
+        "aliases": []
+      },
+      "brunette": {
+        "preferred": [
+          "brunette"
+        ],
+        "aliases": []
+      },
+      "redhead": {
+        "preferred": [
+          "redhead",
+          "ginger"
+        ],
+        "aliases": []
+      },
+      "black_hair": {
+        "preferred": [
+          "black-haired"
+        ],
+        "aliases": [
+          "black hair"
+        ]
+      }
+    }
+  },
+  "bias_markers": {
+    "racialized_genitalia": {
+      "terms": [
+        "bbc",
+        "big black cock",
+        "bwc",
+        "big white cock",
+        "big asian cock",
+        "big arab cock"
+      ],
+      "definition": "Fetishizing racialized genitalia; audit only."
+    },
+    "exoticization": {
+      "terms": [
+        "exotic",
+        "jungle fever",
+        "yellow fever",
+        "snow bunny",
+        "chocolate",
+        "ebony goddess"
+      ],
+      "definition": "Stereotype descriptors that 'other' racial/ethnic groups."
+    },
+    "trans_fetishization": {
+      "terms": [
+        "shemale",
+        "ladyboy",
+        "tgirl",
+        "tranny",
+        "he-she",
+        "she-male",
+        "transgendered",
+        "a transgender",
+        "shim",
+        "it",
+        "femboy",
+        "femboi",
+        "futanari"
+      ],
+      "definition": "Derogatory/misgendering terminology for trans people; audit only."
+    },
+    "colorism": {
+      "terms": [
+        "light-skinned",
+        "lightskinned",
+        "light skin",
+        "dark-skinned",
+        "darkskinned",
+        "dark skin",
+        "brown skin",
+        "fair skin",
+        "yellow bone",
+        "redbone",
+        "fair skin",
+        "tan skin",
+        "pink"
+      ],
+      "definition": "Color hierarchies within racial groups."
+    },
+    "criminalization_racialized": {
+      "terms": [
+        "thug",
+        "black thugs",
+        "ghetto",
+        "ghetto girl",
+        "hood",
+        "felon",
+        "inmate",
+        "ex-con",
+        "ex con"
+      ],
+      "definition": "Criminalizing tropes attached to race."
+    },
+    "religious_attire_fetishization": {
+      "terms": [
+        "hijab",
+        "niqab",
+        "burqa",
+        "nun",
+        "monk",
+        "yarmulke",
+        "kippah",
+        "sikh turban",
+        "bindi",
+        "priest",
+        "imam",
+        "rabbi",
+        "pope"
+      ],
+      "definition": "Fetishization of religious dress/identity markers."
+    },
+    "racialized_roles_stereotypes": {
+      "terms": [
+        "maid",
+        "housemaid",
+        "harem",
+        "concubine",
+        "geisha",
+        "nanny"
+      ],
+      "definition": "Roles historically tied to racialized servitude/exoticism."
+    },
+    "queerphobic_slurs": {
+      "terms": [
+        "faggot",
+        "faggots",
+        "fag",
+        "fags",
+        "dyke",
+        "dykes",
+        "lez",
+        "lesbo",
+        "lezzie",
+        "homo",
+        "homos",
+        "pansy",
+        "pansies",
+        "sissy",
+        "sissies",
+        "sodomite",
+        "sodomites"
+      ],
+      "notes": "HurtLex/UDS-LSV classes; for harm exposure only."
+    },
+    "transphobic_slurs": {
+      "terms": [
+        "brick",
+        "chick with dick",
+        "boy with pussy",
+        "trap",
+        "dickgirl",
+        "dragzilla",
+        "chaser",
+        "aunt TIF",
+        "uncle TIM",
+        "blanchtard",
+        "bog goblin",
+        "booger queen",
+        "doll with balls",
+        "guys in disguise",
+        "hon",
+        "jocks in frocks",
+        "poonbro",
+        "shemale",
+        "shim",
+        "truscum",
+        "troon"
+      ],
+      "notes": "Separated from trans_fetishization to isolate explicit slurs."
+    },
+    "racialized_pairing_shorthand": {
+      "terms": [
+        "interracial",
+        "ir",
+        "mixed",
+        "bwwm",
+        "wmbw",
+        "wmww",
+        "bmww"
+      ],
+      "definition": "Common pairing acronyms; presence may vary by site dump."
+    },
+    "breeding_objectification": {
+      "terms": [
+        "breeding",
+        "breed her",
+        "breed me",
+        "stud",
+        "bull"
+      ],
+      "definition": "Objectification metaphors paralleling animal husbandry."
+    }
+  },
+  "vocabulary_rules": {
+    "hyphen_space_variants": true,
+    "ascii_fallback": true,
+    "pluralize_suffixes_for_equipment": [
+      "boot",
+      "glove",
+      "mask",
+      "hood",
+      "gag",
+      "collar",
+      "rope",
+      "plug",
+      "wheel",
+      "crop",
+      "whip",
+      "paddle",
+      "cane",
+      "cuff",
+      "clamp"
+    ],
+    "avoid_negative_contexts": [
+      {
+        "term": "asian",
+        "negates_if_contains": [
+          "caucasian"
+        ]
+      }
+    ],
+    "intersectional_generation": {
+      "race_terms_actor": [
+        "black",
+        "white",
+        "asian",
+        "latina",
+        "latino",
+        "arab",
+        "mixed",
+        "desi",
+        "afro-latina",
+        "afro-latino",
+        "black british"
+      ],
+      "gender_terms_actor": [
+        "woman",
+        "man",
+        "trans woman",
+        "trans man",
+        "nonbinary",
+        "couple",
+        "lesbian",
+        "gay man"
+      ],
+      "actor_patterns": [
+        "{race_terms_actor} {gender_terms_actor}",
+        "{race_terms_actor}-{gender_terms_actor}"
+      ],
+      "pair_connectors": [
+        "",
+        "with",
+        "and",
+        "vs",
+        "/",
+        "&",
+        "on"
+      ],
+      "pairing_patterns": [
+        "{actorA} {pair_connectors} {actorB}",
+        "{actorA} {pair_connectors} {actorB} couple",
+        "interracial {actorA} {pair_connectors} {actorB}"
+      ],
+      "racialized_genitalia": {
+        "abbr_map": {
+          "bbc": "big black cock",
+          "bwc": "big white cock",
+          "bac": "big asian cock",
+          "barc": "big arab cock",
+          "blc": "big latino cock"
+        },
+        "genital_synonyms": [
+          "cock",
+          "dick",
+          "penis"
+        ],
+        "partner_races": [
+          "white",
+          "black",
+          "asian",
+          "latina",
+          "latino",
+          "arab",
+          "mixed",
+          "desi"
+        ],
+        "partner_genders": [
+          "woman",
+          "man",
+          "trans woman",
+          "trans man",
+          "nonbinary"
+        ],
+        "connectors": [
+          "",
+          "with",
+          "on",
+          "for",
+          "x",
+          "/",
+          "&"
+        ],
+        "longform_patterns": [
+          "big {race} {genital_synonyms}",
+          "huge {race} {genital_synonyms}"
+        ],
+        "abbr_patterns": [
+          "{abbr}",
+          "{abbr} {connectors} {partner_races} {partner_genders}",
+          "{abbr} {partner_races}",
+          "{abbr} {partner_genders}"
+        ],
+        "longform_pair_patterns": [
+          "big {race} {genital_synonyms} {connectors} {partner_races} {partner_genders}",
+          "huge {race} {genital_synonyms} {connectors} {partner_races} {partner_genders}"
+        ],
+        "policy_note": "All racialized-genital patterns are flagged as bias_markers for audit only and are not used as identity labels or training targets."
+      }
+    }
+  }
+}

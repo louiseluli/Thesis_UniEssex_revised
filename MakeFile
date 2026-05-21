@@ -1,0 +1,184 @@
+# ===== AlgoFairness / Pornometrics — Makefile =====
+# Run numbered pipeline steps, self-checks, and quality tasks.
+# Usage examples:
+#   make 01                      # build corpus
+#   make 02 SC=--selfcheck       # EDA on self-check sample
+#   make 09 N=100000 SC=--selfcheck  # BERT baseline (self-check with sample)
+#   make eda models fairness all # groups
+#   make fmt lint                # code quality
+#   make clean                   # (safe) output cleanup instructions
+#
+# Tip: SC and N are optional environment-style args:
+#   SC=--selfcheck     (enables safe small-run mode where supported)
+#   N=50000            (sample size passed to scripts that accept --sample)
+#
+# ==================================================
+
+SHELL := /bin/bash
+.SHELLFLAGS := -eu -o pipefail -c
+
+# ---- Project knobs
+PY      ?= python3
+CFG     ?= config/settings.yaml
+SEED    ?= 95
+SRC     := src
+OUT     := outputs
+
+# Optional flags you can pass: SC=--selfcheck and N=50000
+SAMPLE  := $(if $(N),--sample $(N),)
+COMMON  := --config $(CFG) $(SC) $(SAMPLE)
+
+.PHONY: help env reqs fmt lint check all eda models fairness dissertation presentations \
+        01 02 03 04 05 06 07 07a 08 09 10 11 12 13 \
+        14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 \
+        commit clean
+
+help:
+	@echo "Targets:"
+	@echo "  01..30            Run individual numbered steps"
+	@echo "  eda/models/fairness/dissertation/presentations/all"
+	@echo "  fmt lint check    Code quality"
+	@echo "  env reqs          Create venv & install dependencies"
+	@echo "  commit m='msg'    Stage + commit the standard files"
+	@echo "  clean             Safe guidance for cleaning large artefacts"
+	@echo ""
+	@echo "Args you can pass: SC=--selfcheck  N=80000  CFG=config/settings.yaml"
+	@echo ""
+
+# --- Dev env helpers
+env:
+	$(PY) -m venv .venv
+	@echo "Run: source .venv/bin/activate"
+
+reqs:
+	@if [ -f requirements.txt ]; then \
+	  . .venv/bin/activate 2>/dev/null || true; \
+	  pip install -r requirements.txt; \
+	else \
+	  echo "No requirements.txt found. Install packages per README."; \
+	fi
+
+fmt:  # format with black/ruff if present
+	@if command -v ruff >/dev/null 2>&1; then ruff check --fix .; fi
+	@if command -v black >/dev/null 2>&1; then black .; fi
+
+lint:
+	@if command -v ruff >/dev/null 2>&1; then ruff check .; fi
+	@if command -v flake8 >/dev/null 2>&1; then flake8 . || true; fi
+
+check: fmt lint
+
+# --- Numbered pipeline (match README structure)
+01:
+	$(PY) $(SRC)/data/01_corpus_builder.py $(COMMON)
+
+02:
+	$(PY) $(SRC)/analysis/02_comprehensive_eda.py $(COMMON)
+
+03:
+	$(PY) $(SRC)/analysis/03_intersectional_profiling.py $(COMMON)
+
+04:
+	$(PY) $(SRC)/analysis/04_multilayer_harm_analysis.py $(COMMON)
+
+05:
+	$(PY) $(SRC)/analysis/05_statistical_bias_tests.py $(COMMON)
+
+06:
+	$(PY) $(SRC)/data/06_stratified_splitting.py $(COMMON)
+
+07:
+	$(PY) $(SRC)/models/07_rf_baseline.py $(COMMON)
+
+07a:
+	$(PY) $(SRC)/models/07a_category_sweep.py $(COMMON)
+
+08:
+	$(PY) $(SRC)/fairness/08_comprehensive_evaluation.py $(COMMON)
+
+09:
+	$(PY) $(SRC)/models/09_bert_baseline.py $(COMMON)
+
+10:
+	$(PY) $(SRC)/fairness/10_preprocessing_mitigation.py $(COMMON)
+
+11:
+	$(PY) $(SRC)/fairness/11_inprocessing_mitigation.py $(COMMON)
+
+12:
+	$(PY) $(SRC)/fairness/12_postprocessing_mitigation.py $(COMMON)
+
+13:
+	$(PY) $(SRC)/fairness/13_mitigation_effectiveness.py $(COMMON)
+
+14:
+	$(PY) $(SRC)/dissertation/14_rq_synthesis.py $(COMMON)
+
+15:
+	$(PY) $(SRC)/analysis/15_qualitative_deep_dive.py $(COMMON)
+
+16:
+	$(PY) $(SRC)/analysis/16_deep_data_analysis.py $(COMMON)
+
+17:
+	$(PY) $(SRC)/analysis/17_engagement_bias_analysis.py $(COMMON)
+
+18:
+	$(PY) $(SRC)/analysis/18_category_group_dynamics.py $(COMMON)
+
+19:
+	$(PY) $(SRC)/analysis/19_advanced_statistics.py $(COMMON)
+
+20:
+	$(PY) $(SRC)/analysis/20_network_analysis.py $(COMMON)
+
+21:
+	$(PY) $(SRC)/visualization/21_interactive_dashboard.py $(COMMON)
+
+22:
+	$(PY) $(SRC)/experiments/22_ablation_studies.py $(COMMON)
+
+23:
+	$(PY) $(SRC)/analysis/23_limitations_analysis.py $(COMMON)
+
+24:
+	$(PY) $(SRC)/dissertation/24_results_synthesis.py $(COMMON)
+
+25:
+	$(PY) $(SRC)/dissertation/25_pareto_frontier.py $(COMMON)
+
+26:
+	$(PY) $(SRC)/dissertation/26_executive_summary.py $(COMMON)
+
+27:
+	$(PY) $(SRC)/fairness/27_ground_truth.py $(COMMON)
+
+28:
+	$(PY) $(SRC)/presentation/28_qa_backup_slides.py $(COMMON)
+
+29:
+	$(PY) $(SRC)/presentation/29_single_video_explainer.py $(COMMON)
+
+30:
+	$(PY) $(SRC)/fairness/causal/30_psm_ipw.py $(COMMON)
+
+# --- Groups
+eda: 02 03 04 05
+models: 07 07a 09
+fairness: 08 10 11 12 13 30
+dissertation: 14 24 25 26
+presentations: 28 29
+all: 01 eda 06 models fairness 15 16 17 18 19 20 21 22 23 dissertation presentations
+
+# --- Commit helper for “Output 0” bootstrap commit
+commit:
+	@git add Makefile README.md config/settings.yaml config/protected_terms.json .gitignore || true
+	@git commit -m "$(m)"
+
+# --- Clean guidance (non-destructive by default)
+clean:
+	@echo "This target prints safe cleanup tips."
+	@echo " - Large raw DB and heavy models should NOT go to git:"
+	@echo "   data/redtube_videos.db, outputs/models/*, outputs/data/*.parquet, HF checkpoints under outputs/models/09_bert/"
+	@echo " - If you really want to delete heavy artefacts locally:"
+	@echo "   rm -rf outputs/models/*.joblib outputs/models/09_bert checkpoints"

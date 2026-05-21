@@ -1,0 +1,30 @@
+# core
+pandas
+numpy
+scipy
+scikit-learn
+matplotlib
+seaborn
+joblib
+PyYAML
+tqdm
+statsmodels
+networkx
+SQLAlchemy
+Jinja2
+Markdown
+pyarrow
+fairlearn
+imbalanced-learn
+
+# NLP / BERT
+torch
+torchvision
+torchaudio
+transformers
+datasets
+evaluate
+tokenizers
+sentencepiece
+torchmetrics
+tensorboard

@@ -1,0 +1,75 @@
+# -*- coding: utf-8 -*-
+#
+# Harm Taxonomy for the AlgoFairness-Pornometrics1 Project.
+# This file operationalizes the theoretical framework for identifying and
+# categorizing algorithmic harms, linking abstract concepts to concrete
+# measurement methods.
+#
+# Academic Sources:
+# - Crawford, K. (2017). The Trouble with Bias.
+# - Barocas, S., & Selbst, A. D. (2016). Big Data's Disparate Impact.
+# - Selbst, A. D., et al. (2019). Fairness and Abstraction in Sociotechnical Systems.
+#
+
+# --- Note on the term "Denigration" ---
+# This research uses the term 'denigration' to refer to a specific category of
+# representational harm, following the taxonomy established in fairness literature
+# (Crawford, 2017). We acknowledge the term's deeply offensive racial etymology
+# and use it here only in its narrow, technical academic context to mean systematic
+# insult or defamation, while recognizing the harm and pain its historical and
+# colloquial usage continues to cause.
+
+# --- 1. Representational Harms ---
+# Harms that occur when systems misrepresent or subordinate social groups.
+# These harms impact dignity, identity, and social standing.
+RepresentationalHarms:
+  Stereotyping:
+    definition: "Assigning attributes to a group based on preconceived notions, limiting their perceived complexity and reinforcing societal biases."
+    measurement_methods:
+      [pmi_analysis, weat_scores, scs_metric, contextual_bias_probes]
+    citation: "(Crawford, 2017)"
+  Erasure:
+    definition: "The systematic under-representation or complete omission of a group from a system, rendering them invisible and marginalizing their existence."
+    measurement_methods: [coverage_metrics, representation_quotient]
+    citation: "(Buolamwini & Gebru, 2018)"
+  Denigration:
+    definition: "The portrayal of a group in a demeaning, insulting, or defamatory manner through association with harmful or offensive language."
+    measurement_methods:
+      [lexicon_harm_analysis, sentiment_analysis, hurtlex_mapping]
+    citation: "(Crawford, 2017)"
+
+# --- 2. Allocative Harms ---
+# Harms that occur when a system allocates or withholds opportunities, resources,
+# or information differentially across groups.
+AllocativeHarms:
+  OpportunityDenial:
+    definition: "The unfair denial of opportunities or resources to individuals based on their group identity, leading to disadvantages in areas like visibility or monetization."
+    measurement_methods: [equal_opportunity_diff, equalized_odds_diff]
+    citation: "(Barocas & Selbst, 2016)"
+  ResourceMaldistribution:
+    definition: "The inequitable distribution of platform resources, such as views, high ratings, or prominent recommendations, across different groups."
+    measurement_methods:
+      [engagement_disparity_tests, recommendation_bias_analysis]
+    citation: "(Noble, 2018)"
+  EconomicDisadvantage:
+    definition: "Systematic patterns that lead to lower potential for monetization or economic gain for certain groups, often mediated by visibility and platform promotion."
+    measurement_methods:
+      [monetization_proxy_metrics, visibility_loss_quantification]
+    citation: "(Benjamin, 2019)"
+
+# --- 3. Quality-of-Service Harms ---
+# Harms specific to the user experience and interaction with the platform's
+# algorithmic systems, which can vary unfairly across groups.
+QualityOfServiceHarms:
+  RecommendationBias:
+    definition: "Algorithmic recommendations that steer users towards stereotypical content or fail to recommend diverse creators, reinforcing biased user behavior."
+    measurement_methods: [stereotype_consistency_in_recs, diversity_indices]
+    citation: "(Ricci et al., 2015)"
+  SearchVisibilityBias:
+    definition: "Search algorithms that rank content from certain groups lower than others, effectively making them harder to find and reducing their reach."
+    measurement_methods: [group_fairness_in_ranking_metrics] # e.g., NDCG disparity
+    citation: "(Noble, 2018)"
+  ModerationDisparities:
+    definition: "Uneven application of content moderation policies, where content from marginalized groups is disproportionately flagged or removed compared to similar content from dominant groups."
+    measurement_methods: [false_positive_rate_diff_moderation]
+    citation: "(Gillespie, 2018)"

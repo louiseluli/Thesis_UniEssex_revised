@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\centering
+\caption{log10(views+1): Group vs White Women (Mann–Whitney U; FDR-corrected).}
+\label{tab:05-bias-views}
+\begin{tabular}{llllllllllllllllll}
+\toprule
+ & Privileged & N\_group & N\_priv & Mean\_group & Mean\_priv & Median\_group & Median\_priv & MWU\_U & p\_value & Cliffs\_delta & Cohens\_d & MedianDiff(group-priv) & CI\_low & CI\_high & p\_fdr & reject@0.05FDR & sig \\
+Group &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\midrule
+All Men & White Women & 66384 & 546 & 3.740 & 3.470 & 4.010 & 3.630 & 20263546 & 0.000 & 0.118 & 0.196 & 0.379 & 0.200 & 0.518 & 0.000 & True & **** \\
+Black Women & White Women & 638 & 546 & 3.750 & 3.470 & 4.070 & 3.630 & 196315 & 0.000 & 0.127 & 0.205 & 0.444 & 0.230 & 0.610 & 0.000 & True & *** \\
+Asian Women & White Women & 410 & 546 & 3.230 & 3.470 & 3.250 & 3.630 & 98036 & 0.001 & -0.124 & -0.185 & -0.380 & -0.658 & -0.099 & 0.002 & True & ** \\
+All Women & White Women & 13616 & 546 & 3.640 & 3.470 & 3.880 & 3.630 & 3988204 & 0.004 & 0.073 & 0.122 & 0.250 & 0.073 & 0.383 & 0.005 & True & ** \\
+Latina Women & White Women & 185 & 546 & 3.680 & 3.470 & 4.070 & 3.630 & 55392 & 0.049 & 0.097 & 0.152 & 0.440 & 0.015 & 0.662 & 0.049 & True & * \\
+\bottomrule
+\end{tabular}
+
+\begin{tablenotes}[flushleft]
+\item \small{CI is bootstrap for median difference.}
+\end{tablenotes}
+\end{table}
