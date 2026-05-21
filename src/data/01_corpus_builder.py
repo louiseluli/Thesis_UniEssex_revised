@@ -431,8 +431,8 @@ def main() -> None:
     # --- quality flags (added 2026-05-20) ---
     # is_animated: 1 if the video has animated/non-human tags AND no real-person tags.
     # Purely animated content should be excluded from human-performer fairness analysis.
-    _anim_pat = r'\b(hentai|cartoon|anime|3d|animated|animation|toon|cgi)\b'
-    _real_pat  = r'\b(amateur|milf|teen|pornstar|lesbian|black|ebony|asian|caucasian|latina|interracial|gay|bisexual|trans)\b'
+    _anim_pat = r'\b(?:hentai|cartoon|anime|3d|animated|animation|toon|cgi)\b'
+    _real_pat  = r'\b(?:amateur|milf|teen|pornstar|lesbian|black|ebony|asian|caucasian|latina|interracial|gay|bisexual|trans)\b'
     _tags_lower = df['tags'].str.lower().fillna('')
     has_anim = _tags_lower.str.contains(_anim_pat, regex=True, na=False)
     has_real = _tags_lower.str.contains(_real_pat, regex=True, na=False)
