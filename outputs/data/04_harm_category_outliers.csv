@@ -1,0 +1,16 @@
+Group,HurtLex Category,Count,N,Prevalence (%)
+race_ethnicity_asian,ps,52655,52724,99.9
+race_ethnicity_middle_eastern_north_african,qas,4455,5043,88.3
+race_ethnicity_mixed_or_other,asm,37554,43807,85.7
+gender_gender_trans,qas,239,286,83.6
+race_ethnicity_black,asm,40280,48235,83.5
+intersectional_black_female,asm,12991,15966,81.4
+race_ethnicity_latina,asm,38159,46908,81.3
+gender_gender_male,asm,47330,59866,79.1
+race_ethnicity_middle_eastern_north_african,asm,3934,5043,78.0
+gender_gender_trans,asm,219,286,76.6
+race_ethnicity_latina,qas,35009,46908,74.6
+intersectional_black_female,ps,11829,15966,74.1
+gender_gender_male,qas,42861,59866,71.6
+race_ethnicity_black,ps,33718,48235,69.9
+race_ethnicity_white,asf,66350,96124,69.0

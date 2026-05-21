@@ -1,0 +1,6 @@
+Group,Privileged,N_group,N_priv,Mean_group,Mean_priv,Median_group,Median_priv,MWU_U,p_value,Cliffs_delta,Cohens_d,MedianDiff(group-priv),CI_low,CI_high,p_fdr,reject@0.05FDR,sig
+All Men,White Women,334129,31459,3.78,4.22,4.07,4.38,4351244146,0.0,-0.172,-0.325,-0.312,-0.325,-0.301,0.0,True,****
+All Women,White Women,201107,31459,3.62,4.22,3.85,4.38,2290415396,0.0,-0.276,-0.474,-0.528,-0.541,-0.515,0.0,True,****
+Asian Women,White Women,16520,31459,3.44,4.22,3.65,4.38,168636512,0.0,-0.351,-0.669,-0.728,-0.757,-0.697,0.0,True,****
+Black Women,White Women,15966,31459,3.46,4.22,3.72,4.38,167408566,0.0,-0.333,-0.641,-0.658,-0.689,-0.628,0.0,True,****
+Latina Women,White Women,17242,31459,3.4,4.22,3.66,4.38,180256542,0.0,-0.335,-0.675,-0.717,-0.747,-0.686,0.0,True,****
