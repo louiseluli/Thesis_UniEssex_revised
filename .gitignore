@@ -30,6 +30,10 @@ outputs/mitigation/
 *.pdf
 *.json
 
+# Allow figures committed for GitHub README display
+!outputs/figures/**/*.png
+!outputs/figures/*.png
+
 # Training artifacts
 **/checkpoint-*/
 *.safetensors
