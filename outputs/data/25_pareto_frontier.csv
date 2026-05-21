@@ -1,0 +1,3 @@
+model,accuracy,fairness
+RF reweighed,0.954,0.901
+RF postproc,0.84,0.968

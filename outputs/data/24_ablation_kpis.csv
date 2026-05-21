@@ -1,0 +1,9 @@
+scenario,delta
+Lexicon OFF,-0.1472
+Noise 10%,-0.0182
+Noise 25%,-0.0397
+Noise 50%,-0.0999
+TopK 10,-1.0288
+TopK 20,-0.0068
+TopK 30,0.0
+TopK 50,0.3234

@@ -1,0 +1,15 @@
+segment,race_ethnicity,count,share
+head,unknown,2533,0.473
+head,white,1461,0.273
+head,mixed_or_other,639,0.119
+head,latina,413,0.077
+head,black,144,0.027
+head,asian,119,0.022
+head,middle_eastern_north_african,44,0.008
+tail,unknown,291431,0.55
+tail,white,77627,0.146
+tail,mixed_or_other,55618,0.105
+tail,asian,42636,0.08
+tail,latina,35945,0.068
+tail,black,24203,0.046
+tail,middle_eastern_north_african,2423,0.005

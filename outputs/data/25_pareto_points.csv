@@ -1,0 +1,5 @@
+model,accuracy,fairness
+RF baseline,0.881,0.8
+RF inproc,0.88,0.7030000000000001
+RF postproc,0.84,0.968
+RF reweighed,0.954,0.901

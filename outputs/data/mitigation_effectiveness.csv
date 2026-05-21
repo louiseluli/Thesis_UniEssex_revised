@@ -1,0 +1,5 @@
+Model,Test Accuracy,Accuracy Δ (vs White) [Black Women],TPR Δ (vs White) [Black Women]
+Baseline RF,0.878,0.073,0.196
+"In-Processing (EG, DP)",0.878,0.095,0.138
+Post-Processing (Threshold),0.839,0.01,0.008
+Reweighed RF,0.953,0.038,0.092

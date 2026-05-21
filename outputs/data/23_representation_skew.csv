@@ -1,0 +1,3 @@
+dimension,n_distinct,min_share,max_share,entropy_norm,gini,underrep_groups
+race_ethnicity,7,0.0046,0.5492,0.7186,0.5359,middle_eastern_north_african
+gender,5,0.0002,0.5632,0.6293,0.5597,gender_trans

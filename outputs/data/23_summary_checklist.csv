@@ -1,0 +1,7 @@
+issue,flag,metric_detail
+High missingness in key fields (>20%),False,0.0
+Strong representation imbalance (entropy_norm < 0.80),True,0.6293
+Temporal drift in BW share (|slope| > 0.005/yr),False,0.000938
+Severe long-tail (Top-10 categories cover < 50%),False,0.7207319311476967
+HurtLex dependency high (median max-prevalence ≥ 10%),False,
+Simpson’s flip detected (overall vs per-year correlation sign differs),False,-0.0156

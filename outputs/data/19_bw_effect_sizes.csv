@@ -1,0 +1,4 @@
+metric,cliffs_delta,ci_lo,ci_hi,n_bw,n_others
+views_per_day,-0.1704,-0.1829,-0.1574,7136,528100
+ratings_per_day,-0.1462,-0.1584,-0.1342,7136,528100
+rating,-0.0015,-0.0172,0.0124,7136,528100

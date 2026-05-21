@@ -1,0 +1,6 @@
+Group,N,Accuracy,Precision,Recall,F1
+Asian Women,3039,0.876,0.861,0.649,0.74
+Black Women,3193,0.844,0.88,0.562,0.686
+Latina Women,2814,0.81,0.818,0.558,0.664
+Other,92248,0.879,0.858,0.681,0.759
+White Women,5754,0.917,0.946,0.758,0.842

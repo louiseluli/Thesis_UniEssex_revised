@@ -1,0 +1,6 @@
+issue,flag,metric
+Representation entropy low (race),True,0.7186
+Representation entropy low (gender),True,0.6293
+Long-tail severe (Top-10 < 50%),False,0.7207319311476967
+High lexicon dependency (median max ≥ 10%),False,
+Bootstrap CI width improved (200→1000),False,

@@ -16,6 +16,8 @@ Markdown
 pyarrow
 fairlearn
 imbalanced-learn
+tabulate
+requests
 
 # NLP / BERT
 torch

@@ -1,0 +1,5 @@
+Comparison Group,Accuracy Disparity,Equal Opportunity Difference,Precision Disparity
+Asian Women,0.031,0.099,0.027
+Black Women,0.038,0.092,0.033
+Latina Women,0.055,0.077,0.079
+Other,0.019,0.029,0.044

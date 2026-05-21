@@ -1,0 +1,3 @@
+race_ethnicity_asian,n,views_mean,views_median,rating_mean,rating_median,ratings_count_mean,ratings_count_median,gini_views,gini_rating_count,max_abs_cliffs_delta_views
+0,482512,88470.128,10065.0,67.639,80.537,156.047,23.0,0.8409,0.8224,0.0821
+1,52724,47809.457,5823.5,62.763,75.411,87.055,13.0,0.8192,0.8047,0.0821
