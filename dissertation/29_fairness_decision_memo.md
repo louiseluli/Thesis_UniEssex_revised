@@ -1,5 +1,9 @@
 # Fairness Decision Memo
 
+> **⚠️ DRAFT — numbers in this file are from an intermediate run and do not match the canonical results in REBUILD_PLAN.md.**
+> Regenerate by running steps 13 and 25 on the full corpus after re-running the full pipeline.
+> Do not cite these numbers in papers or PhD applications until regenerated.
+
 This memo consolidates the **Step 25** accuracy–fairness Pareto frontier analysis with the full mitigation comparison to recommend a single operating point suitable for deployment. All numbers are drawn directly from pipeline outputs and are reproducible.
 
 *Generated from: `outputs/data/25_pareto_points.csv`, `outputs/data/25_pareto_frontier.csv`, `outputs/data/mitigation_effectiveness.csv`*
