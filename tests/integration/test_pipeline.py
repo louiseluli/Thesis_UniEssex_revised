@@ -46,7 +46,7 @@ class TestPipeline:
             'race_ethnicity_black': np.random.choice([0, 1], n_samples, p=[0.9, 0.1]),
             'race_ethnicity_asian': np.random.choice([0, 1], n_samples, p=[0.85, 0.15]),
             'race_ethnicity_latina': np.random.choice([0, 1], n_samples, p=[0.8, 0.2]),
-            'gender_woman': np.random.choice([0, 1], n_samples, p=[0.2, 0.8])
+            'gender_female': np.random.choice([0, 1], n_samples, p=[0.2, 0.8])
         })
         
         return df
@@ -54,7 +54,7 @@ class TestPipeline:
     def test_full_pipeline_execution(self, raw_data):
         """Test that full pipeline executes without errors"""
         # Feature engineering
-        X, y, groups = create_features(raw_data)
+        X, y, groups, _ = create_features(raw_data)
         assert X is not None, "Feature creation failed"
         assert len(X) == len(y) == len(groups), "Length mismatch"
         
@@ -75,7 +75,7 @@ class TestPipeline:
         n_original = len(raw_data)
         
         # Track sample count through pipeline
-        X, y, groups = create_features(raw_data)
+        X, y, groups, _ = create_features(raw_data)
         n_after_features = len(X)
         
         # Some samples may be dropped (e.g., missing values)
@@ -93,7 +93,7 @@ class TestPipeline:
     
     def test_mitigation_improves_fairness(self, raw_data):
         """Test that mitigation improves fairness metrics"""
-        X, y, groups = create_features(raw_data)
+        X, y, groups, _ = create_features(raw_data)
         
         # Baseline metrics
         baseline_model = train_baseline_model(X, y)
@@ -112,7 +112,7 @@ class TestPipeline:
         results = []
         
         for _ in range(2):
-            X, y, groups = create_features(raw_data)
+            X, y, groups, _ = create_features(raw_data)
             model = apply_reweighing(X, y, groups, random_state=42)
             pred = model.predict(X)
             results.append(pred)

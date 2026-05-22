@@ -181,8 +181,9 @@ class TestPower:
         power_analysis = TTestPower()
         theoretical_power = power_analysis.power(
             effect_size=effect_size,
-            nobs=n_samples,
+            nobs1=n_samples,
             alpha=0.05,
+            alternative='two-sided',
         )
         
         print(f"Empirical power: {empirical_power:.3f}")

@@ -19,6 +19,9 @@ imbalanced-learn
 tabulate
 requests
 
+# Development / testing
+pytest
+
 # NLP / BERT
 torch
 torchvision
