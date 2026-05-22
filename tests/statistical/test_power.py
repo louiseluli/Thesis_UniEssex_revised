@@ -5,7 +5,7 @@ Tests whether sample sizes are sufficient to detect effects.
 import pytest
 import numpy as np
 import pandas as pd
-from statsmodels.stats.power import TTestPower, NormalIndPower
+from statsmodels.stats.power import TTestPower, TTestIndPower, NormalIndPower
 from scipy import stats
 import sys
 import os
@@ -177,11 +177,12 @@ class TestPower:
         
         empirical_power = significant_results / n_simulations
         
-        # Compare to theoretical power
-        power_analysis = TTestPower()
+        # Compare to theoretical power (two-sample t-test)
+        power_analysis = TTestIndPower()
         theoretical_power = power_analysis.power(
             effect_size=effect_size,
             nobs1=n_samples,
+            ratio=1.0,
             alpha=0.05,
             alternative='two-sided',
         )
