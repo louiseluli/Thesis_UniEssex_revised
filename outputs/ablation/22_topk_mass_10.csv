@@ -1,0 +1,2 @@
+scenario,delta,baseline,value,note
+TopK 10,-1.0288,1.4709,0.442,KPI computed over top-10 categories by frequency.

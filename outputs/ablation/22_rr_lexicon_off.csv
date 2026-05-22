@@ -1,0 +1,2 @@
+scenario,delta,baseline,value,note
+Lexicon OFF,-0.1472,1.4709,1.3236,Race-coded tokens removed before computing BW log2 RR.

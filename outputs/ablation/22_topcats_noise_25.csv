@@ -1,0 +1,2 @@
+scenario,delta,baseline,value,note
+Noise drop 25%,-0.0397,1.4709,1.4312,"Randomly dropped 25% of (row,category) assignments."
