@@ -598,6 +598,152 @@ The group priority fix revealed that model behaviour is sensitive to how groups 
 
 ---
 
+## 8. Technical & Engineering Future Directions
+
+The following directions focus on improving the pipeline itself — better features, better calibration, better engineering — rather than extending the research scope. These are the natural next steps for anyone working directly with this codebase.
+
+### 8.1 Feature engineering improvements
+
+The current RF pipeline uses `HashingVectorizer (2-gram, 2¹⁸) → TruncatedSVD (256)` on `title + tags`. Several improvements are low-effort and high-impact:
+
+**Text representation:**
+- **Subword tokenisation for non-English titles**: ~15% of titles are non-English (Spanish, Japanese, German, Russian visible in the outlier lists). The current hashing vectorizer treats these as character noise. Replacing with a multilingual tokeniser (`xlm-roberta-base`) would improve recall for Latina and Asian Women whose titles skew non-English.
+- **Separate tag and title encodings**: currently title and tags are concatenated before vectorisation. Encoding them with separate SVD components and concatenating the feature vectors would allow the model to learn that "amateur" in a tag carries different information than "amateur" in a title.
+- **TF-IDF instead of binary hashing**: `HashingVectorizer(binary=False)` with IDF weighting would down-weight near-universal tags ("hd", "verified amateurs" appear in 48–92% of videos) that add noise.
+- **Category-as-feature**: the `categories` column is currently only used as the target. Including category indicators as *input features* (excluding the positive class to avoid leakage) would capture content-type structure independent of text.
+
+**Numeric features:**
+- `duration`, `ratings` are the only numeric features. Adding `log1p(views)` and `age_days` (time since publish) would give the model access to engagement signals that correlate with Amateur content patterns.
+- **Interaction features**: `ratings / age_days` (ratings-per-day) and `views / ratings` (engagement ratio) capture quality signals that simple counts miss.
+
+**Exploration path**: Run `src/models/07a_category_sweep.py --categories Amateur` after each feature change to measure the delta in TestF1 and TestAUROC. The sweep script already saves per-threshold validation performance, making it a natural ablation harness.
+
+### 8.2 Model calibration
+
+The ThresholdOptimizer's effectiveness depends on the RF's predicted probabilities being well-calibrated. If P(Y=1|X) = 0.7 does not actually correspond to 70% of those predictions being correct, the linear programme finds suboptimal thresholds.
+
+**Calibration diagnosis:**
+```python
+from sklearn.calibration import calibration_curve
+fraction_of_positives, mean_predicted_value = calibration_curve(y_test, p_test, n_bins=10)
+```
+Plot this against the diagonal — gaps indicate miscalibration. The RF's predicted probabilities are known to be poorly calibrated (they cluster near 0 and 1 because of the averaging-over-trees mechanism).
+
+**Calibration methods to try:**
+- **Platt scaling** (`CalibratedClassifierCV(method='sigmoid')`): logistic regression on held-out val predictions. 5–10 minutes, no retraining.
+- **Isotonic regression** (`CalibratedClassifierCV(method='isotonic')`): non-parametric, better for large datasets. 15–30 minutes.
+- **Temperature scaling** (for BERT): divide logits by a learned scalar before softmax. Standard for transformer calibration, 2 minutes.
+
+**Expected impact**: Better-calibrated probabilities would reduce the accuracy cost of ThresholdOptimizer (currently −3.9pp) without changing the fairness guarantee. The precision-recall tradeoff at the group level would also shift.
+
+**Implementation**: Add a `--calibrate` flag to `src/fairness/08_comprehensive_evaluation.py` that fits a calibrator on val predictions before the threshold sweep.
+
+### 8.3 SVD components and feature dimensionality
+
+The current TruncatedSVD uses 256 components. This was not systematically tuned. The `src/experiments/22_ablation_studies.py` framework already tests feature removal — extending it to SVD dimensionality is straightforward:
+
+```python
+for n_components in [64, 128, 256, 512]:
+    model = make_rf_baseline(SEED, n_svd_components=n_components)
+    # evaluate and record TestF1, TestAUROC, per-group EOD
+```
+
+**Hypothesis**: 128 components may match 256 performance at half the RAM and 40% faster training, based on the eigenvalue decay of tag-vocabulary matrices. The `07_rf_feature_importance.csv` already shows that SVD component importance decays rapidly after component ~80.
+
+### 8.4 Lexicon expansion and validation
+
+The protected-terms lexicon (`config/protected_terms.json`) drives all group inference. It has not been systematically validated against a ground-truth sample. Two priorities:
+
+**Recall audit (missing terms):**
+- Run the corpus through the existing pipeline and inspect videos in the "Other" category that the model assigns high probability of being Amateur. If these are visually/textually racialised content that the lexicon missed, add the missing terms.
+- API endpoint: `redtube.Videos.searchVideos` with specific tag queries can retrieve candidate videos for lexicon expansion without a full re-crawl.
+
+**Precision audit (false positives):**
+- Use `src/fairness/27_ground_truth.py --make-template --sample 200` to generate an annotation template for 200 randomly sampled "Black Women" videos. Human review of 200 videos takes ~2 hours and would give a direct estimate of lexicon precision.
+- Target: precision ≥ 0.90 before citing group counts in regulatory contexts.
+
+**Automatic expansion:**
+- Use PMI results (`outputs/data/03_pmi_intersectional_black_women.csv`) to identify high-PMI tags not currently in the lexicon. Tags with PMI > 4.0 that appear in > 50 videos are strong candidates for addition.
+
+### 8.5 Reweighing with continuous group membership
+
+The current reweighing treats group membership as binary (in group / not in group). A video can have PMI-5.07 "black girl" tags AND "interracial" tags — it is more strongly associated with the Black Women group than a video with only one low-frequency tag. A continuous group-membership weight could improve calibration:
+
+```python
+# Instead of binary group indicator A ∈ {0,1}
+# Use fuzzy membership: A_i = number of matching lexicon terms / max_matches_in_corpus
+# Then reweigh by bucketised continuous A
+```
+
+This is an open research problem (see Kearns et al. 2018 on subgroup fairness) but the PMI scores in `03_pmi_intersectional_black_women_full.csv` provide a natural continuous group-membership signal.
+
+### 8.6 BERT fine-tuning improvements
+
+The current BERT run uses default HuggingFace TrainingArguments with 2 epochs and batch size 16. Several improvements are worth testing:
+
+**Hyperparameters:**
+- **Learning rate schedule**: cosine decay with warmup (1,000 steps) typically outperforms constant LR for short fine-tuning runs. Expected gain: +0.5–1pp F1.
+- **Epoch count**: 3 epochs with early stopping on val F1 to avoid overfitting. The val metrics at epoch 1 vs epoch 2 from the current run are in `outputs/data/09_bert_val_metrics.csv` — check if there's still room to gain.
+- **Batch size**: increase to 32 or 64 if GPU memory allows (MPS on Apple Silicon supports larger batches than CUDA on small GPUs). Larger batches stabilise the EG fairness training as well.
+
+**Model choice:**
+- `distilbert-base-multilingual-cased`: handles non-English titles natively. ~10% more parameters but crucial for Latina and Asian Women's content where non-English titles are prevalent.
+- `bert-base-uncased` (larger than DistilBERT): AUROC ceiling may be higher. The gap between RF (0.957) and DistilBERT (0.924) on AUROC suggests there is signal in the text the current BERT is not extracting.
+
+**BERT + reweighing**: apply Kamiran-Calders weights during BERT fine-tuning via the HuggingFace Trainer's `compute_loss` hook. BERT + reweighing is not yet evaluated and could dominate the current Pareto frontier.
+
+### 8.7 Database and collector improvements
+
+**DB schema:**
+- Add a `retrieved_at` index on the `videos` table. The current `video_categories.video_id` index (which reduced join time from 4 min to 8 sec) demonstrates that schema changes have outsized impact on runtime.
+- WAL mode is already enabled (evident from the `.db-shm` and `.db-wal` files). Consider `PRAGMA synchronous = NORMAL` for faster incremental writes during collection.
+
+**Collector improvements:**
+- The daily collector (`scripts/collect_daily.sh`) runs `--ordering newest --new-only`. An additional monthly run with `--ordering rating --period monthly` would catch high-rated content that didn't surface in the newest feed.
+- **Deduplication at collection time**: the `is_duplicate` flag is currently set post-hoc in step 01. Adding a pre-insert check in `collector.py` would keep the DB cleaner.
+- **API rate limit monitoring**: the `collection_state` table tracks daily request counts. Add a daily summary log that alerts when >80% of the daily limit is consumed, to prevent hitting the hard 30k cap.
+
+### 8.8 Pipeline orchestration
+
+Currently steps are run manually in sequence. Three improvements would make the pipeline more robust:
+
+**Dependency tracking:**
+- Steps 07–13 depend on step 06's split IDs. If step 06 is re-run (e.g., after a corpus update), steps 07–13 should be invalidated automatically. A simple hash-of-input check at the start of each script would catch this.
+
+**Make targets for full-run vs selfcheck:**
+```makefile
+# Already have individual targets (07, 08, etc.)
+# Add:
+full-run: 01 02 03 04 05 06 07 08 09 10 11 12 13 16 17 18 19 20 22 23 24 25 26
+selfchecks: 
+    python src/data/01_corpus_builder.py --selfcheck
+    python src/data/06_stratified_splitting.py --selfcheck --sample 50000
+    python src/models/07_rf_baseline.py --selfcheck --sample 120000
+```
+
+**Output validation:**
+- After each step, check that the output CSVs have the expected number of rows and key columns. A lightweight `validate_outputs.py` script that reads `outputs/data/*.csv` and checks shape + column presence would catch silent failures (empty outputs from a crashed step that nonetheless exits 0).
+
+### 8.9 Test suite extensions
+
+The current 52-test suite covers unit correctness and cross-validation stability. Missing coverage:
+
+- **Lexicon regression tests**: assert that specific videos (known Black Women content by video_id) are always assigned to the correct group. Guards against lexicon changes breaking group inference.
+- **Output schema tests**: assert that `07_fairness_group_metrics.csv` always contains exactly the 5 expected Group values with non-zero N. Currently a step can produce an empty group table and no test would catch it.
+- **EOD monotonicity test**: assert that reweighing EOD ≤ baseline EOD for all groups. This formalises the claim that reweighing always helps — if it ever fails, something is wrong with the weight computation or the split.
+- **Reproducibility tests**: assert that two runs with identical seed produce byte-identical output CSVs. Currently `tests/integration/test_pipeline.py::test_pipeline_reproducibility` tests this for a synthetic dataset; it should be extended to a small real-data selfcheck.
+
+### 8.10 Code quality and refactoring opportunities
+
+These are not research priorities but would improve maintainability for PhD extension work:
+
+- **Centralise group labelling**: `group_labels_intersectional()` in `fairness_evaluation_utils.py` is now the canonical implementation after the priority-fix session. The local `_group_labels()` functions in steps 10, 11, 12 should be removed and replaced with imports from the central utility. This removes six copies of the same logic.
+- **Standardise threshold selection**: steps 07, 08, 10, 12 each implement their own threshold sweep. Extract to a shared `_sweep_threshold(y_true, probs, thresholds)` utility in `fairness_evaluation_utils.py`.
+- **Config-driven column names**: `TEXT_COL`, `CATS_COL`, `NUM_COLS` are redefined in every script. They read from CONFIG but with different fallback values. Centralise in `theme_manager.load_config()` with a single canonical accessor.
+- **Logging**: replace `print()` with `logging.getLogger(__name__)` throughout. This would allow log-level control (`--verbose`, `--quiet`) without modifying every print statement, and would enable log file capture for unattended overnight runs.
+
+---
+
 ## Evidence Index
 
 | Finding | Source file |
