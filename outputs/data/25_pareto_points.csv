@@ -1,4 +1,5 @@
 model,accuracy,fairness
+BERT baseline,0.924,0.817
 RF baseline,0.881,0.8
 RF inproc,0.88,0.7030000000000001
 RF postproc,0.84,0.968

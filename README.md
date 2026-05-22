@@ -18,7 +18,7 @@ This repository presents a complete and reproducible research pipeline for audit
 
 The corpus comprises **535,236 videos across 111 categories and 52 features**. The Random Forest baseline (accuracy: 87.8%, F1: 0.758) reveals substantial Equal Opportunity Differences: Black Women (EOD: 0.196, recall: 0.562 vs. 0.758 for White Women) and Latina Women (EOD: 0.200, recall: 0.558) face the steepest classification disadvantage. Beyond model performance, the analysis documents that Black Women's content ratings are declining significantly faster than the corpus average (slope gap: −3.38/year, bootstrap 95% CI [−3.75, −2.98]) and identifies racial occupational pipeline segregation in the platform's amateur content economy.
 
-Six mitigation strategies are compared using **Pareto analysis** on two objectives (accuracy × fairness). Only two strategies are non-dominated: **post-processing ThresholdOptimizer** (accuracy: 0.839, near-exact parity — max EOD 0.027 across all groups) and **pre-processing reweighing** (accuracy: 0.953, Black Women EOD reduced from 0.196 to 0.092 — a 53% reduction). Critically, adversarial debiasing was dominated on both objectives and *worsened* outcomes for Asian Women (EOD: 0.109 → 0.283, from original thesis run) because their content vocabulary constitutes the classification signal itself — a feature representation problem that reweighting cannot solve. This work provides a fully reproducible framework for auditing, measuring, and mitigating intersectional algorithmic harm in content platforms.
+Six mitigation strategies are compared using **Pareto analysis** on two objectives (accuracy × fairness). Only two strategies are non-dominated: **post-processing ThresholdOptimizer** (accuracy: 0.839, near-exact parity — max EOD 0.027 across all groups) and **pre-processing reweighing** (accuracy: 0.953, Black Women EOD reduced from 0.196 to 0.092 — a 53% reduction). Critically, adversarial debiasing was dominated on both objectives and *worsened* outcomes for Asian Women (EOD: 0.109 → 0.283, from original thesis run) because their content vocabulary constitutes the classification signal itself — a feature representation problem that reweighting cannot solve. DistilBERT (accuracy: 0.924, F1: 0.868) substantially reduces the Black Women recall gap (EOD: 0.196 → 0.080) but is dominated in Pareto space by both non-dominated strategies. This work provides a fully reproducible framework for auditing, measuring, and mitigating intersectional algorithmic harm in content platforms.
 
 ---
 
@@ -64,7 +64,7 @@ This project was guided by five core research questions. Below, each question is
 **Answer:** Yes, both baseline models achieve high overall accuracy. However, this headline performance masks substantial and systematic disparities that affect Black, Latina, and Asian Women most severely.
 
 - **Random Forest (RF) — test set accuracy: 87.8%, F1: 0.758**
-- **DistilBERT — test set accuracy: 92.6% (pending re-run on corrected corpus; treat as upper bound)**
+- **DistilBERT — test set accuracy: 92.4%, F1: 0.868 (verified on corrected corpus)**
 
 **Random Forest — per-group performance at operating threshold (test set, N = 107,048):**
 
@@ -112,11 +112,13 @@ Black Women recall (0.562) is 19.6 percentage-points below White Women (0.758): 
 | In-proc (EG + DP) | 0.878 | 0.809 | 0.138 | 0.297 (Latina) | dominated |
 | Post-proc (ThresholdOpt) | 0.839 | 0.693 | 0.008 | 0.027 (Latina) | **non-dominated** |
 | Adversarial debiasing | 0.796 | 0.479 | 0.276 | **0.360** (Latina) | dominated ‡ |
-| DistilBERT | 0.926 | 0.871 | — | — | pending re-run |
+| DistilBERT | **0.924** | **0.868** | 0.080 | 0.183 (Latina) | dominated |
 
-*Source: `outputs/data/25_pareto_points.csv`, `outputs/data/10_reweigh_overall_metrics.csv`, `outputs/data/12_postproc_overall_metrics.csv`. ‡ Adversarial debiasing results are from the original thesis run; step 11b outputs are not reproduced in this repository.*
+*Source: `outputs/data/25_pareto_points.csv`, `outputs/data/09_fairness_group_metrics.csv`, `outputs/data/10_reweigh_overall_metrics.csv`, `outputs/data/12_postproc_overall_metrics.csv`. ‡ Adversarial debiasing results are from the original thesis run; step 11b outputs are not reproduced in this repository.*
 
 **Key finding — adversarial debiasing failure:** Adversarial debiasing was the only strategy that *increased* EOD for two groups relative to the baseline (Asian Women: 0.109 → 0.283; Latina Women: 0.200 → 0.360, from original thesis run). This is not a tuning failure but a structural one: because racial identity is encoded primarily in tag-based vocabulary, penalising the model for using protected features removes the signal it needs to classify these categories accurately. Post-processing achieves near-exact parity (max EOD 0.027 across all groups) at a 3.9 pp accuracy cost.
+
+**DistilBERT per-group performance (test set):** BERT substantially reduces the Black Women gap (EOD: 0.196 → 0.080, −59%) relative to the RF baseline, but is dominated in Pareto space by Reweighed RF on accuracy (0.924 vs 0.953) and by ThresholdOptimizer on fairness (0.183 vs 0.027 max EOD). Its interpretability limitations and 2-3 hour training cost make it less suitable for routine auditing workflows.
 
 **Reweighed RF per-group performance (test set):**
 

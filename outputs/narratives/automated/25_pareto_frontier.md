@@ -1,6 +1,6 @@
 # Step 25 — Pareto Frontier
 
-- Total models considered: **4**
+- Total models considered: **5**
 - Pareto-optimal models: **2**
 - Frontier set: RF reweighed, RF postproc
 
